@@ -1,0 +1,672 @@
+openapi: 3.0.0
+info:
+  title: EnerGym
+  description: EnerGym API.
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/NPERATIK_1/Energym/1.0.0
+  description: SwaggerHub API Auto Mocking
+paths:
+  /user/{UserId}/PersonalDetails:
+    post:
+      summary: User provides personal details
+      description: |
+        FR2: The user must give his/her personal details.
+        FR3: The user must inform  about his/her goal.
+      operationId: userUserIdPersonalDetailsPOST
+      parameters:
+      - name: UserId
+        in: path
+        description: ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/PersonalDetails'
+      responses:
+        "200":
+          description: Default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalDetails'
+      x-swagger-router-controller: Default
+  /user/{UserId}/ContractInformation:
+    get:
+      summary: Retrieve contract information
+      description: |
+        FR10: The user should be able to view the date that the contract starts/ends.
+      operationId: userUserIdContractInformationGET
+      parameters:
+      - name: UserId
+        in: path
+        description: ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: A user's contract dates
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractInformation'
+      x-swagger-router-controller: Default
+  /user/{UserId}/ReferralProgram:
+    post:
+      summary: Invite new members
+      description: |
+        FR17: The user should be able to invite new members.
+      operationId: userUserIdReferralProgramPOST
+      parameters:
+      - name: UserId
+        in: path
+        description: ID of the user inviting new members
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Details of the member to be invited
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReferralProgram'
+        required: true
+      responses:
+        "200":
+          description: Invitation sent successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferralProgram'
+      x-swagger-router-controller: Default
+  /user/{UserId}/TrainingStats:
+    get:
+      summary: Retrieve user training statistics
+      description: |
+        FR11: The user should be able to view the training stats.
+      operationId: userUserIdTrainingStatsGET
+      parameters:
+      - name: UserId
+        in: path
+        description: ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: User's training statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainingStats'
+      x-swagger-router-controller: Default
+  /Eshop:
+    get:
+      summary: Access gym's e-shop
+      description: |
+        FR12: The user should have access to gym's e-shop.
+      operationId: eshopGET
+      responses:
+        "200":
+          description: Access to e-shop granted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Eshop'
+      x-swagger-router-controller: Default
+  /ContactInformation:
+    get:
+      summary: Retrieve gym's contact details
+      description: |
+        FR9: The user must be able to access contact details.
+      operationId: contactInformationGET
+      responses:
+        "200":
+          description: A user's contact details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactInformation'
+      x-swagger-router-controller: Default
+  /LiveCapacity:
+    put:
+      summary: Update live gym capacity
+      description: |
+        FR7: The user should be able to know how many people are in the gym.
+      operationId: liveCapacityPUT
+      requestBody:
+        $ref: '#/components/requestBodies/LiveCapacity'
+      responses:
+        "200":
+          description: successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiveCapacity'
+      x-swagger-router-controller: Default
+  /user/{UserId}/BookGroupExercise:
+    post:
+      summary: Book a group exercise
+      description: |
+        FR6: The user should be able to book a group exercise.
+      operationId: userUserIdBookGroupExercisePOST
+      parameters:
+      - name: UserId
+        in: path
+        description: ID of the user booking the exercise
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/GroupExerciseName'
+      responses:
+        "200":
+          description: Group exercise booked successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookGroupExercise'
+      x-swagger-router-controller: Default
+  /user/{userID}/WorkoutSchedule:
+    get:
+      summary: View workout schedule
+      description: |
+        FR21: The user must be able to view his/her workout schedule.
+      operationId: getWorkoutSchedule
+      parameters:
+      - name: userID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkoutSchedule'
+                x-content-type: application/json
+      x-swagger-router-controller: Default
+  /admin/{AdminID}/exercises:
+    post:
+      summary: Add new exercise
+      description: |
+        FR22: Admin should be able to add a new exercise.
+      operationId: adminAdminIDExercisesPOST
+      parameters:
+      - name: AdminID
+        in: path
+        description: ID of the admin adding a new exercise
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Details of the new exercise
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Exercise'
+        required: true
+      responses:
+        "201":
+          description: Exercise added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exercise'
+      x-swagger-router-controller: Default
+    delete:
+      summary: Remove exercise
+      description: |
+        FR22: Admin should be able to remove an existing exercise.
+      operationId: adminAdminIDExercisesDELETE
+      parameters:
+      - name: AdminID
+        in: path
+        description: ID of the admin removing an exercise
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: exerciseId
+        in: query
+        description: ID of the exercise to be removed
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Exercise removed successfully
+      x-swagger-router-controller: Default
+  /admin/{AdminID}/addGroupExerciseSchedule:
+    post:
+      summary: Add group exercise to schedule
+      description: |
+        FR19: The admin should be able to add a new group exercise schedule.
+      operationId: adminAdminIDAddGroupExerciseSchedulePOST
+      parameters:
+      - name: AdminID
+        in: path
+        description: ID of the admin adding a new Group Exercise Schedule
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/GroupExerciseSchedule'
+      responses:
+        "201":
+          description: Group exercise added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupExerciseSchedule'
+      x-swagger-router-controller: Default
+  /admin/{AdminID}/removeGroupExerciseSchedule:
+    delete:
+      summary: Remove group exercise from schedule
+      description: |
+        FR19: The admin should be able to remove an excisting group exercise schedule.
+      operationId: adminAdminIDRemoveGroupExerciseScheduleDELETE
+      parameters:
+      - name: AdminID
+        in: path
+        description: ID of the admin removing a Group Exercise Schedule
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: GroupExerciseId
+        in: query
+        description: ID of the group exercise to be removed
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Group exercise removed successfully
+      x-swagger-router-controller: Default
+  /admin/{AdminID}/editGroupExerciseSchedule:
+    put:
+      summary: Edit group exercise in schedule
+      description: |
+        FR19: The admin should be able to edit a group exercise schedule.
+      operationId: adminAdminIDEditGroupExerciseSchedulePUT
+      parameters:
+      - name: AdminID
+        in: path
+        description: ID of the admin editing a Group Exercise Schedule
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupExercise'
+        required: true
+      responses:
+        "200":
+          description: Group exercise edited successfully
+      x-swagger-router-controller: Default
+  /admin/{AdminID}/AddWorkoutSchedule:
+    post:
+      summary: Add a workout schedule for a user
+      description: |
+        FR4: The admin must add a new workout schedule.
+      operationId: adminAdminIDAddWorkoutSchedulePOST
+      parameters:
+      - name: AdminID
+        in: path
+        description: ID of the admin added a workout Schedule
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/WorkoutSchedule'
+      responses:
+        "200":
+          description: workout schedule added
+      x-swagger-router-controller: Default
+  /admin/{AdminID}/RemoveWorkoutSchedule:
+    delete:
+      summary: Delete a workout schedule for a user
+      description: |
+        FR4: The admin must remove an excisting workout schedule.
+      operationId: adminAdminIDRemoveWorkoutScheduleDELETE
+      parameters:
+      - name: AdminID
+        in: path
+        description: ID of the admin deleted a workout Schedule
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: GroupExerciseId
+        in: query
+        description: ID of the workout schedule to be removed
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: workout schedule deleted
+      x-swagger-router-controller: Default
+  /exercise:
+    get:
+      summary: Returns all exercises
+      description: "FR20: The user must be able to view all the exercises. \nFR5:\
+        \ The user must be able to search for exercises.\n"
+      operationId: getAllExercises
+      parameters:
+      - name: searchText
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: filter
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Exercise'
+                x-content-type: application/json
+      x-swagger-router-controller: Default
+components:
+  schemas:
+    User:
+      required:
+      - PersonalDetails
+      - userID
+      type: object
+      properties:
+        userID:
+          type: integer
+          format: int64
+        PersonalDetails:
+          type: object
+    PersonalDetails:
+      required:
+      - Age
+      - Goal
+      - Mobilenumber
+      - Name
+      - Surname
+      - Weight
+      - email
+      type: object
+      properties:
+        Name:
+          type: string
+        Surname:
+          type: string
+        Age:
+          type: integer
+          format: int32
+        email:
+          type: string
+          format: email
+        Mobilenumber:
+          type: integer
+          format: int64
+        Weight:
+          type: integer
+        Goal:
+          type: string
+      example:
+        Goal: Goal
+        Surname: Surname
+        Age: 0
+        email: ""
+        Weight: 1
+        Name: Name
+        Mobilenumber: 6
+    ContractInformation:
+      required:
+      - PastContracts
+      - endingDate
+      - startingDate
+      type: object
+      properties:
+        startingDate:
+          type: string
+          format: date
+        endingDate:
+          type: string
+          format: date
+        PastContracts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContractInformation_PastContracts'
+      example:
+        endingDate: 2000-01-23
+        PastContracts:
+        - endingDate: 2000-01-23
+          startingDate: 2000-01-23
+        - endingDate: 2000-01-23
+          startingDate: 2000-01-23
+        startingDate: 2000-01-23
+    ContactInformation:
+      required:
+      - Email
+      - PhoneNumber
+      - PhysicalAddress
+      type: object
+      properties:
+        Email:
+          type: string
+          format: email
+        PhysicalAddress:
+          type: string
+          format: address
+        PhoneNumber:
+          type: integer
+          format: int64
+      example:
+        Email: ""
+        PhoneNumber: 0
+        PhysicalAddress: PhysicalAddress
+    TrainingStats:
+      required:
+      - AverageTime
+      - Histogram
+      - TimesPerMonth
+      type: object
+      properties:
+        AverageTime:
+          type: integer
+          format: int32
+        Histogram:
+          type: string
+          format: binary
+        TimesPerMonth:
+          type: integer
+          format: int32
+      example:
+        Histogram: ""
+        TimesPerMonth: 6
+        AverageTime: 0
+    Eshop:
+      type: string
+      format: url
+    ReferralProgram:
+      type: string
+      format: pattern
+    BookGroupExercise:
+      type: boolean
+    LiveCapacity:
+      type: integer
+      format: int32
+    Exercise:
+      required:
+      - Title
+      - exerciseImage
+      - explanationVideo
+      type: object
+      properties:
+        Title:
+          type: string
+          description: Unique identifier for the exercise
+        exerciseImage:
+          type: string
+          format: binary
+        explanationVideo:
+          type: object
+      example:
+        explanationVideo: {}
+        exerciseImage: ""
+        Title: Title
+    explanationVideo:
+      required:
+      - duration
+      - thumbnail
+      - videoURL
+      type: object
+      properties:
+        duration:
+          type: string
+          format: duration
+        videoURL:
+          type: string
+          description: The URL of the training session video
+          format: uri
+        thumbnail:
+          type: string
+          format: binary
+    GroupExercise:
+      required:
+      - Availability
+      - Date
+      - Name
+      - Time
+      type: object
+      properties:
+        Name:
+          type: string
+        Availability:
+          type: boolean
+        Date:
+          type: string
+          format: date
+        Time:
+          type: string
+          format: time
+    GroupExerciseSchedule:
+      type: array
+      items:
+        $ref: '#/components/schemas/GroupExerciseSchedule_inner'
+    WorkoutSchedule:
+      type: string
+      description: A PDF file
+      format: binary
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: chest
+    ContractInformation_PastContracts:
+      type: object
+      properties:
+        startingDate:
+          type: string
+          format: date
+        endingDate:
+          type: string
+          format: date
+      example:
+        endingDate: 2000-01-23
+        startingDate: 2000-01-23
+    GroupExerciseSchedule_inner:
+      type: object
+      properties:
+        GroupExercise:
+          type: object
+      example:
+        GroupExercise: {}
+  requestBodies:
+    PersonalDetails:
+      description: Personal details of the user
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PersonalDetails'
+      required: true
+    GroupExerciseName:
+      description: Details of the group exercise to be booked
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BookGroupExercise'
+      required: true
+    LiveCapacity:
+      description: Number of people in the gym
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LiveCapacity'
+      required: true
+    GroupExerciseSchedule:
+      description: Details of the group exercise schedule to be added
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GroupExerciseSchedule'
+      required: true
+    WorkoutSchedule:
+      description: Details of the workout schedule
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WorkoutSchedule'
+      required: true
