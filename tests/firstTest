@@ -1,0 +1,22 @@
+// Importing necessary modules
+const http = require("http");
+const test = require("ava");
+const listen = require("test-listen");
+const got = require("got");
+const app = require("../index");
+
+const userID = generateTestID();
+
+// Setup before running tests
+test.before(async (t) => {
+  // Creating an HTTP server for the app
+  t.context.server = http.createServer(app);
+  // Listening to the server and getting the URL
+  t.context.prefixUrl = await listen(t.context.server);
+  // Extending got for HTTP requests with predefined options
+  t.context.got = got.extend({
+    prefixUrl: t.context.prefixUrl,
+    responseType: "json",
+    throwHttpErrors: false,
+  });
+});
