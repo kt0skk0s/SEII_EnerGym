@@ -24,4 +24,4 @@ http.createServer(app).listen(serverPort, function () {
 });
 }
 
-export default app;
+module.exports = app;
