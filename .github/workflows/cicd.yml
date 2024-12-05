@@ -25,7 +25,7 @@ jobs:
     needs: ci
     steps:
       - name: Deploy to Render
-        uses: kt0skk0s/SEII_EnerGym/@v3.0.63
+        uses: kt0skk0s/SEII_EnerGym/.github/workflows/cicd@main
         with:
           service-id: ${{ secrets.RENDER_SERVICE_ID }}
           api-key: ${{ secrets.RENDER_API_KEY }}
