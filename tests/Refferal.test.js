@@ -29,18 +29,28 @@ test("applyReferral returns the correct structure for a valid referral code", as
 
 
 /*
-test('Referral Program POST should resolve with example data', async t => {
+test('Referral Program POST should resolve with example data', async (t) => {
   const body = "Details of the member to be invited";
   const userId = "12345";
+
+  // Call the service function
   const result = await ReferralProgramPOST(body, userId);
-  t.deepEqual(result, ""); // Επιβεβαίωση ότι το αποτέλεσμα είναι όπως αναμενόταν
+
+  // Expected example data
+  const expected = {
+      message: "Referral processed successfully",
+      referredUserId: "12345",
+      details: "Details of the member to be invited",
+  };
+
+  t.deepEqual(result, expected);
 });
 
+test('Referral Program POST should resolve with no data if examples are empty', async (t) => {
+  const body = "empty"; // Simulate no data by passing "empty"
+  const userId = "12345";
 
-test('Check the type of userID', async t => {
-  const body = "";
-  const userId = 2852;
   const result = await ReferralProgramPOST(body, userId);
-  t.is(Number.isInteger(result), true);
+  t.deepEqual(result, undefined); // Περιμένουμε undefined αν τα παραδείγματα είναι άδεια
 });
 */
