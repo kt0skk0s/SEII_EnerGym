@@ -356,7 +356,8 @@ exports.ReferralProgramPOST = function(body,userId) {
       resolve();
     }
   });
-}
+};
+
 
 
 /**
