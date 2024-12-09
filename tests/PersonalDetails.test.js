@@ -53,8 +53,7 @@ test('POST  addUserDetails returns success response with required fields', async
         json: mockUser.PersonalDetails,  
         responseType: 'json'
     });
-    // Assertions
-  //  t.is(statusCode, 200, 'Should return 200 ');
+   
 
     t.truthy(body.Name, 'Name should be returned in response');
     t.truthy(body.Surname, 'Surname should be returned in response');
@@ -70,8 +69,8 @@ test('POST  addUserDetails returns success response with required fields', async
 test('POST contactDetails returns the correct response', async (t) => {
     const mockContactDetails = {
         Email: "test@example.com",
-        PhoneNumber: "1234567890",
-        Address: "1234 Test St"
+        PhoneNumber: "9655574",
+        Address: "ADdress"
     };
     
     const response = await t.context.got.post('contactDetails', {
