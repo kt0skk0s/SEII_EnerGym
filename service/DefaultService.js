@@ -271,17 +271,23 @@ exports.liveCapacityPUT = function(body) {
  * userId String ID of the user booking the exercise
  * returns BookGroupExercise
  **/
-exports.BookGroupExercisePOST = function(body,userId) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = true;
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
+exports.BookGroupExercisePOST = function (body, userId) {
+  return new Promise(function (resolve, reject) {
+    if (!body || !userId) {
+      reject(new Error('Invalid input: body and userId are required'));
     }
+
+    // Simulated booking logic (replace with real logic)
+    const bookingDetails = {
+      success: true,
+      message: 'Booking confirmed',
+      userId: userId,
+      details: body,
+    };
+
+    resolve(bookingDetails);
   });
-}
+};
 
 
 /**
