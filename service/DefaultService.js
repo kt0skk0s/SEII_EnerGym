@@ -296,7 +296,7 @@ exports.ContractInformationGET = function(userId) {
  * userId String ID of the user
  * returns PersonalDetails
  **/
-exports.PersonalDetailsPOST = function(body,userId) {
+exports.PersonalDetailsPOST = function(body) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
@@ -316,6 +316,25 @@ exports.PersonalDetailsPOST = function(body,userId) {
   });
 }
 
+exports.PersonalDetailsPUT = function(body,userId) {
+  return new Promise(function(resolve, reject) {
+    var examples = {};
+    examples['application/json'] = {
+  "Goal" : "Goal",
+  "Surname" : "Surname",
+  "Age" : 0,
+  "email" : "",
+  "Weight" : 1,
+  "Name" : "Name",
+  "Mobilenumber" : 6
+};
+    if (Object.keys(examples).length > 0) {
+      resolve(examples[Object.keys(examples)[0]]);
+    } else {
+      resolve();
+    }
+  });
+}
 
 /**
  * Invite new members
@@ -328,7 +347,9 @@ exports.PersonalDetailsPOST = function(body,userId) {
 exports.ReferralProgramPOST = function(body,userId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
-    examples['application/json'] = "";
+    examples['application/json'] = {
+     "ReferralCode" : "ReferralCode"
+    };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
