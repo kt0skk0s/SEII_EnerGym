@@ -9,30 +9,21 @@
  * adminID String ID of the admin adding a new Group Exercise Schedule
  * returns GroupExerciseSchedule
  **/
-exports.AddGroupExerciseSchedulePOST = function (body, adminId) {
-    return new Promise((resolve, reject) => {
-        if (!body.scheduleName || !body.time || !body.days) {
-            reject({
-                message: 'Missing required fields: scheduleName, time, or days.',
-            });
-        }
-
-        // Mock data for the new schedule
-        const newSchedule = {
-            scheduleName: body.scheduleName,
-            time: body.time,
-            days: body.days,
-            adminId: adminId,
-        };
-
-        // Simulate successful addition
-        resolve({
-            message: 'Successful group exercise upload',
-            schedule: newSchedule,
-        });
-    });
-};
-
+exports.adminAdminIDAddGroupExerciseSchedulePOST = function(body,adminID) {
+  return new Promise(function(resolve, reject) {
+    var examples = {};
+    examples['application/json'] = [ {
+  "GroupExercise" : { }
+}, {
+  "GroupExercise" : { }
+} ];
+    if (Object.keys(examples).length > 0) {
+      resolve(examples[Object.keys(examples)[0]]);
+    } else {
+      resolve();
+    }
+  });
+}
 
 
 /**
@@ -43,7 +34,7 @@ exports.AddGroupExerciseSchedulePOST = function (body, adminId) {
  * adminID String ID of the admin added a workout Schedule
  * no response value expected for this operation
  **/
-exports.AddWorkoutSchedulePOST = function(body,adminID) {
+exports.adminAdminIDAddWorkoutSchedulePOST = function(body,adminID) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
@@ -58,28 +49,11 @@ exports.AddWorkoutSchedulePOST = function(body,adminID) {
  * adminID String ID of the admin editing a Group Exercise Schedule
  * no response value expected for this operation
  **/
-exports.EditGroupExerciseSchedulePUT = function (body, adminId) {
-  return new Promise((resolve, reject) => {
-      if (!body.scheduleId || !body.changes) {
-          reject({
-              message: 'Missing required fields: scheduleId or changes.',
-          });
-      }
-
-      // Mock data for the updated schedule
-      const updatedSchedule = {
-          scheduleId: body.scheduleId,
-          ...body.changes,
-      };
-
-      // Simulate successful update
-      resolve({
-          message: 'Successful group exercise edit',
-          updatedSchedule: updatedSchedule,
-      });
+exports.adminAdminIDEditGroupExerciseSchedulePUT = function(body,adminID) {
+  return new Promise(function(resolve, reject) {
+    resolve();
   });
-};
-
+}
 
 
 /**
@@ -90,112 +64,7 @@ exports.EditGroupExerciseSchedulePUT = function (body, adminId) {
  * exerciseId String ID of the exercise to be removed
  * no response value expected for this operation
  **/
-exports.ExercisesDELETE = function(adminID,exerciseId) {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
-}
-
-
-/**
-... (302 γραμμές ακόμα)
-Σύμπτυξη
-message.txt
-11 KB
-﻿
-'use strict';
-
-
-/**
- * Add group exercise to schedule
- * FR19: The admin should be able to add a new group exercise schedule. 
- *
- * body List Details of the group exercise schedule to be added
- * adminID String ID of the admin adding a new Group Exercise Schedule
- * returns GroupExerciseSchedule
- **/
-exports.AddGroupExerciseSchedulePOST = function (body, adminId) {
-    return new Promise((resolve, reject) => {
-        if (!body.scheduleName || !body.time || !body.days) {
-            reject({
-                message: 'Missing required fields: scheduleName, time, or days.',
-            });
-        }
-
-        // Mock data for the new schedule
-        const newSchedule = {
-            scheduleName: body.scheduleName,
-            time: body.time,
-            days: body.days,
-            adminId: adminId,
-        };
-
-        // Simulate successful addition
-        resolve({
-            message: 'Successful group exercise upload',
-            schedule: newSchedule,
-        });
-    });
-};
-
-
-
-/**
- * Add a workout schedule for a user
- * FR4: The admin must add a new workout schedule. 
- *
- * body Object Details of the workout schedule
- * adminID String ID of the admin added a workout Schedule
- * no response value expected for this operation
- **/
-exports.AddWorkoutSchedulePOST = function(body,adminID) {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
-}
-
-
-/**
- * Edit group exercise in schedule
- * FR19: The admin should be able to edit a group exercise schedule. 
- *
- * body GroupExercise 
- * adminID String ID of the admin editing a Group Exercise Schedule
- * no response value expected for this operation
- **/
-exports.EditGroupExerciseSchedulePUT = function (body, adminId) {
-  return new Promise((resolve, reject) => {
-      if (!body.scheduleId || !body.changes) {
-          reject({
-              message: 'Missing required fields: scheduleId or changes.',
-          });
-      }
-
-      // Mock data for the updated schedule
-      const updatedSchedule = {
-          scheduleId: body.scheduleId,
-          ...body.changes,
-      };
-
-      // Simulate successful update
-      resolve({
-          message: 'Successful group exercise edit',
-          updatedSchedule: updatedSchedule,
-      });
-  });
-};
-
-
-
-/**
- * Remove exercise
- * FR22: Admin should be able to remove an existing exercise. 
- *
- * adminID String ID of the admin removing an exercise
- * exerciseId String ID of the exercise to be removed
- * no response value expected for this operation
- **/
-exports.ExercisesDELETE = function(adminID,exerciseId) {
+exports.adminAdminIDExercisesDELETE = function(adminID,exerciseId) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
@@ -210,7 +79,7 @@ exports.ExercisesDELETE = function(adminID,exerciseId) {
  * adminID String ID of the admin adding a new exercise
  * returns Exercise
  **/
-exports.ExercisesPOST = function(body,adminID) {
+exports.adminAdminIDExercisesPOST = function(body,adminID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
@@ -235,7 +104,7 @@ exports.ExercisesPOST = function(body,adminID) {
  * groupExerciseId String ID of the group exercise to be removed
  * no response value expected for this operation
  **/
-exports.RemoveGroupExerciseScheduleDELETE = function(adminID,groupExerciseId) {
+exports.adminAdminIDRemoveGroupExerciseScheduleDELETE = function(adminID,groupExerciseId) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
@@ -250,7 +119,7 @@ exports.RemoveGroupExerciseScheduleDELETE = function(adminID,groupExerciseId) {
  * groupExerciseId String ID of the workout schedule to be removed
  * no response value expected for this operation
  **/
-exports.RemoveWorkoutScheduleDELETE = function(adminID,groupExerciseId) {
+exports.adminAdminIDRemoveWorkoutScheduleDELETE = function(adminID,groupExerciseId) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
@@ -267,7 +136,7 @@ exports.contactInformationGET = function() {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "Email" : "",
+  "Email" : "contact@info.com",
   "PhoneNumber" : 0,
   "PhysicalAddress" : "PhysicalAddress"
 };
@@ -329,10 +198,10 @@ exports.getAllExercises = function(searchText,filter) {
 
 
 /**
- * View workout schedule
+ * Returns the workout schedule of the user
  * FR21: The user must be able to view his/her workout schedule. 
  *
- * userID String 
+ * userID Long 
  * returns List
  **/
 exports.getWorkoutSchedule = function(userID) {
@@ -376,7 +245,7 @@ exports.liveCapacityPUT = function(body) {
  * userId String ID of the user booking the exercise
  * returns BookGroupExercise
  **/
-exports.BookGroupExercisePOST = function(body,userId) {
+exports.userUserIdBookGroupExercisePOST = function(body,userId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = true;
@@ -396,7 +265,7 @@ exports.BookGroupExercisePOST = function(body,userId) {
  * userId String ID of the user
  * returns ContractInformation
  **/
-exports.ContractInformationGET = function(userId) {
+exports.userUserIdContractInformationGET = function(userId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
@@ -427,14 +296,14 @@ exports.ContractInformationGET = function(userId) {
  * userId String ID of the user
  * returns PersonalDetails
  **/
-exports.PersonalDetailsPOST = function(body,userId) {
+exports.userUserIdPersonalDetailsPOST = function(body,userId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
   "Goal" : "Goal",
   "Surname" : "Surname",
-  "Age" : 0,
-  "email" : "",
+  "Age" : 7,
+  "email" : "user@email.com",
   "Weight" : 1,
   "Name" : "Name",
   "Mobilenumber" : 6
@@ -456,29 +325,17 @@ exports.PersonalDetailsPOST = function(body,userId) {
  * userId String ID of the user inviting new members
  * returns ReferralProgram
  **/
-exports.ReferralProgramPOST = function (body, userId) {
-  return new Promise((resolve, reject) => {
-      // Simulate example data only for some cases
-      const hasExamples = body !== "empty"; // A condition to differentiate the test cases
-      const examples = hasExamples
-          ? {
-                "application/json": {
-                    message: "Referral processed successfully",
-                    referredUserId: userId,
-                    details: body,
-                },
-            }
-          : {};
-
-      // Resolve based on the presence of examples
-      if (Object.keys(examples).length > 0) {
-          resolve(examples[Object.keys(examples)[0]]);
-      } else {
-          resolve(undefined); // Explicitly return undefined when no examples exist
-      }
+exports.userUserIdReferralProgramPOST = function(body,userId) {
+  return new Promise(function(resolve, reject) {
+    var examples = {};
+    examples['application/json'] = "";
+    if (Object.keys(examples).length > 0) {
+      resolve(examples[Object.keys(examples)[0]]);
+    } else {
+      resolve();
+    }
   });
-};
-
+}
 
 
 /**
@@ -488,11 +345,11 @@ exports.ReferralProgramPOST = function (body, userId) {
  * userId String ID of the user
  * returns TrainingStats
  **/
-exports.TrainingStatsGET = function(userId) {
+exports.userUserIdTrainingStatsGET = function(userId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "Histogram" : "",
+  "Histogram" : "niovi",
   "TimesPerMonth" : 6,
   "AverageTime" : 0
 };

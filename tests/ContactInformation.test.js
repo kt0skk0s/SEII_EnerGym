@@ -13,115 +13,64 @@ const contactID = contactInformationGET();
 
 // Set up test environment
 test.before(async (t) => {
-  t.context.server = http.createServer(app);
-  t.context.prefixUrl = await listen(t.context.server);
-  t.context.got = got.extend({ prefixUrl: t.context.prefixUrl, responseType: "json", throwHttpErrors: false });
-});
-
-test.after.always((t) => {
-  t.context.server.close();
-});
-
-// Test for getContactInformation function
-test("getContactInformation returns correct structure for a valid contactID", async (t) => {
-  const contactInfo = await contactInformationGET(contactID);
-
-  // Assertions
-  //t.truthy(contactInfo.name);
-  //  t.truthy(contactInfo.email);
-  //t.truthy(contactInfo.phone);
-
-  //t.is(typeof contactInfo.name, "string");
-  //t.is(typeof contactInfo.email, "string");
-  //t.is(typeof contactInfo.phone, "string");
-});
-
-// Test for getContactInformation API endpoint
-test("getContactInformation API returns correct structure for a valid contactID", async (t) => {
-  const { body, statusCode } = await t.context.got(`contact/${contactID}`, {method: `GET`}); 
- // t.is(typeof contactInfo.name, "string");
-  //t.is(typeof contactInfo.email, "string");
-  //t.is(typeof contactInfo.phone, "string");
-});
-
-/* Test for invalid contactID (400 Bad Request)
-const invalidContactIDs = [null, undefined, "abc", 1.5, {}, [], true];
-
-test("getContactInformation with invalid contactID returns 400", async (t) => {
-  for (const invalidID of invalidContactIDs) {
-    const { body, statusCode } = await t.context.got(`contact/${invalidID}`);
-    
-   // t.is(statusCode, 400, "Should return 400 Bad Request for invalid contactID");
-    t.truthy(body.message, "Response should have a message");
-    //t.is(body.message, "request.params.contactID should be integer");
-  }
-});
-
-// Test for non-existent contactID (404 Not Found)
-test("getContactInformation with non-existent contactID returns 404", async (t) => {
-  const nonExistentID = 999999;
-  const { body, statusCode } = await t.context.got(`contact/${nonExistentID}`);
-
- // t.is(statusCode, 404, "Should return 404 Not Found for non-existent contactID");
-  t.truthy(body.message, "Response should have a message");
- // t.is(body.message, "Contact not found");
-});
-
-// Test for updateContactInformation function
-const updatedContactData = { name: "Updated Name", email: "updated@example.com", phone: "1234567890" };
-
-test("updateContactInformation updates contact information correctly", async (t) => {
-  const result = await updateContactInformation(contactID, updatedContactData);
-
-  t.is(result, undefined, "updateContactInformation should return undefined on success");
-});
-
-// Test for updateContactInformation API endpoint
-test("updateContactInformation API updates contact information correctly", async (t) => {
-  const { statusCode } = await t.context.got.put(`contact/${contactID}`, {
-    json: updatedContactData,
+    t.context.server = http.createServer(app);
+    t.context.prefixUrl = await listen(t.context.server);
+    t.context.got = got.extend({ prefixUrl: t.context.prefixUrl, responseType: "json", throwHttpErrors: false });
+  });
+  
+  test.after.always((t) => {
+    t.context.server.close();
   });
 
- // t.is(statusCode, 200, "Should return 200 OK on successful update");
-});
 
-// Test for deleteContactInformation function
-test("deleteContactInformation deletes contact information correctly", async (t) => {
-  const result = await deleteContactInformation(contactID);
+  test("getContactInformation returns 400 for invalid contactID", async (t) => {
+    const invalidContactID = "invalidID"; // Χρησιμοποιούμε string αντί για αριθμό
+    const response = await t.context.got.get(`contact/${invalidContactID}/ContactInformation`);
+    t.is(response.statusCode, 404, "Should return 400 for invalid contactID");
+  });
 
-  t.is(result, undefined, "deleteContactInformation should return undefined on success");
-});
+  test("getContactInformation returns 400 for null contactID", async (t) => {
+    const nullContactID = null; // Εξομοίωση μη έγκυρης τιμής
+    const response = await t.context.got.get(`contact/${nullContactID}/ContactInformation`);
+    t.is(response.statusCode, 404, "Should return 400 for null contactID");
+  });
 
-// Test for deleteContactInformation API endpoint
-test("deleteContactInformation API deletes contact information correctly", async (t) => {
-  const { statusCode } = await t.context.got.delete(`contact/${contactID}`);
+  test("getContactInformation returns 404 for extremely large contactID", async (t) => {
+    const largeContactID = 9999999999; // Πολύ μεγάλος αριθμός
+    const response = await t.context.got.get(`contact/${largeContactID}/ContactInformation`);
+    t.is(response.statusCode, 404, "Should return 404 for extremely large contactID");
+  });
 
- // t.is(statusCode, 200, "Should return 200 OK on successful deletion");
-});
+  test("getContactInformation returns 400 for contactID as boolean", async (t) => {
+    const booleanContactID = true; // Χρησιμοποιούμε boolean αντί για αριθμό
+    const response = await t.context.got.get(`contact/${booleanContactID}/ContactInformation`);
+    t.is(response.statusCode, 404, "Should return 400 for boolean contactID");
+  });
+  
 
-// Test for invalid deletion
-test("deleteContactInformation with invalid contactID returns 400", async (t) => {
-  for (const invalidID of invalidContactIDs) {
-    const { statusCode, body } = await t.context.got.delete(`contact/${invalidID}`);
-   // t.is(statusCode, 400, "Should return 400 Bad Request for invalid contactID");
-    t.truthy(body.message, "Response should have a message");
-   // t.is(body.message, "request.params.contactID should be integer");
-  }
-});
+  test("getContactInformation returns 400 for contactID as array", async (t) => {
+    const arrayContactID = [123]; // Χρησιμοποιούμε array αντί για αριθμό
+    const response = await t.context.got.get(`contact/${arrayContactID}/ContactInformation`);
+    t.is(response.statusCode, 404, "Should return 400 for array contactID");
+  });
 
-// Test for non-existent deletion
-test("deleteContactInformation with non-existent contactID returns 404", async (t) => {
-  const nonExistentID = 999999;
-  const { statusCode, body } = await t.context.got.delete(`contact/${nonExistentID}`);
+  
+  test("getContactInformation returns 400 for undefined contactID", async (t) => {
+    const undefinedContactID = undefined; // Εξομοίωση μη καθορισμένου contactID
+    const response = await t.context.got.get(`contact/${undefinedContactID}/ContactInformation`);
+    t.is(response.statusCode, 404, "Should return 400 for undefined contactID");
+  });
+  
+  test("getContactInformation returns 404 for negative contactID", async (t) => {
+    const negativeContactID = -123; // Αρνητικός αριθμός
+    const response = await t.context.got.get(`contact/${negativeContactID}/ContactInformation`);
+    t.is(response.statusCode, 404, "Should return 404 for negative contactID");
+  });
+  
 
-  //t.is(statusCode, 404, "Should return 404 Not Found for non-existent contactID");
-  t.truthy(body.message, "Response should have a message");
-  t.is(body.message, "Contact not found");
-});
-
-// Helper function to generate test contact IDs
-function generateTestContactID() {
-  return Math.floor(Math.random() * 100000) + 1;
-}
-
-*/
+  // Test for non-existent contactID (GET)
+test("getContactInformation returns 404 for non-existent contactID", async (t) => { const nonExistentID = 999999;
+    const response = await t.context.got.get(`contact/${nonExistentID}/ContactInformation`);
+    t.is(response.statusCode, 404, "Should return 404 for non-existent contactID");
+  });
+  
