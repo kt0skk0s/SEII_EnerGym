@@ -9,21 +9,30 @@
  * adminID String ID of the admin adding a new Group Exercise Schedule
  * returns GroupExerciseSchedule
  **/
-exports.AddGroupExerciseSchedulePOST = function(body,adminID) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "GroupExercise" : { }
-}, {
-  "GroupExercise" : { }
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
-}
+exports.AddGroupExerciseSchedulePOST = function (body, adminId) {
+    return new Promise((resolve, reject) => {
+        if (!body.scheduleName || !body.time || !body.days) {
+            reject({
+                message: 'Missing required fields: scheduleName, time, or days.',
+            });
+        }
+
+        // Mock data for the new schedule
+        const newSchedule = {
+            scheduleName: body.scheduleName,
+            time: body.time,
+            days: body.days,
+            adminId: adminId,
+        };
+
+        // Simulate successful addition
+        resolve({
+            message: 'Successful group exercise upload',
+            schedule: newSchedule,
+        });
+    });
+};
+
 
 
 /**
@@ -49,11 +58,28 @@ exports.AddWorkoutSchedulePOST = function(body,adminID) {
  * adminID String ID of the admin editing a Group Exercise Schedule
  * no response value expected for this operation
  **/
-exports.EditGroupExerciseSchedulePUT = function(body,adminID) {
-  return new Promise(function(resolve, reject) {
-    resolve();
+exports.EditGroupExerciseSchedulePUT = function (body, adminId) {
+  return new Promise((resolve, reject) => {
+      if (!body.scheduleId || !body.changes) {
+          reject({
+              message: 'Missing required fields: scheduleId or changes.',
+          });
+      }
+
+      // Mock data for the updated schedule
+      const updatedSchedule = {
+          scheduleId: body.scheduleId,
+          ...body.changes,
+      };
+
+      // Simulate successful update
+      resolve({
+          message: 'Successful group exercise edit',
+          updatedSchedule: updatedSchedule,
+      });
   });
-}
+};
+
 
 
 /**
@@ -206,13 +232,7 @@ exports.getAllExercises = function(searchText,filter) {
  **/
 exports.getWorkoutSchedule = function(userID) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ "", "" ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    resolve();
   });
 }
 
@@ -245,17 +265,23 @@ exports.liveCapacityPUT = function(body) {
  * userId String ID of the user booking the exercise
  * returns BookGroupExercise
  **/
-exports.BookGroupExercisePOST = function(body,userId) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = true;
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
+exports.BookGroupExercisePOST = function (body, userId) {
+  return new Promise(function (resolve, reject) {
+    if (!body || !userId) {
+      reject(new Error('Invalid input: body and userId are required'));
     }
+
+    // Simulated booking logic (replace with real logic)
+    const bookingDetails = {
+      success: true,
+      message: 'Booking confirmed',
+      userId: userId,
+      details: body,
+    };
+
+    resolve(bookingDetails);
   });
-}
+};
 
 
 /**
