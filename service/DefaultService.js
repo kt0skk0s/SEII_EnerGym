@@ -9,7 +9,7 @@
  * adminID String ID of the admin adding a new Group Exercise Schedule
  * returns GroupExerciseSchedule
  **/
-exports.AddGroupExerciseSchedulePOST = function(body,adminID) {
+exports.adminAdminIDAddGroupExerciseSchedulePOST = function(body,adminID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = [ {
@@ -34,7 +34,7 @@ exports.AddGroupExerciseSchedulePOST = function(body,adminID) {
  * adminID String ID of the admin added a workout Schedule
  * no response value expected for this operation
  **/
-exports.AddWorkoutSchedulePOST = function(body,adminID) {
+exports.adminAdminIDAddWorkoutSchedulePOST = function(body,adminID) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
@@ -49,7 +49,7 @@ exports.AddWorkoutSchedulePOST = function(body,adminID) {
  * adminID String ID of the admin editing a Group Exercise Schedule
  * no response value expected for this operation
  **/
-exports.EditGroupExerciseSchedulePUT = function(body,adminID) {
+exports.adminAdminIDEditGroupExerciseSchedulePUT = function(body,adminID) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
@@ -64,7 +64,7 @@ exports.EditGroupExerciseSchedulePUT = function(body,adminID) {
  * exerciseId String ID of the exercise to be removed
  * no response value expected for this operation
  **/
-exports.ExercisesDELETE = function(adminID,exerciseId) {
+exports.adminAdminIDExercisesDELETE = function(adminID,exerciseId) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
@@ -79,7 +79,7 @@ exports.ExercisesDELETE = function(adminID,exerciseId) {
  * adminID String ID of the admin adding a new exercise
  * returns Exercise
  **/
-exports.ExercisesPOST = function(body,adminID) {
+exports.adminAdminIDExercisesPOST = function(body,adminID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
@@ -104,7 +104,7 @@ exports.ExercisesPOST = function(body,adminID) {
  * groupExerciseId String ID of the group exercise to be removed
  * no response value expected for this operation
  **/
-exports.RemoveGroupExerciseScheduleDELETE = function(adminID,groupExerciseId) {
+exports.adminAdminIDRemoveGroupExerciseScheduleDELETE = function(adminID,groupExerciseId) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
@@ -119,7 +119,7 @@ exports.RemoveGroupExerciseScheduleDELETE = function(adminID,groupExerciseId) {
  * groupExerciseId String ID of the workout schedule to be removed
  * no response value expected for this operation
  **/
-exports.RemoveWorkoutScheduleDELETE = function(adminID,groupExerciseId) {
+exports.adminAdminIDRemoveWorkoutScheduleDELETE = function(adminID,groupExerciseId) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
@@ -198,10 +198,10 @@ exports.getAllExercises = function(searchText,filter) {
 
 
 /**
- * View workout schedule
+ * Returns the workout schedule of the user
  * FR21: The user must be able to view his/her workout schedule. 
  *
- * userID String 
+ * userID Long 
  * returns List
  **/
 exports.getWorkoutSchedule = function(userID) {
@@ -227,7 +227,7 @@ exports.getWorkoutSchedule = function(userID) {
 exports.liveCapacityPUT = function(body) {
   return new Promise(function(resolve, reject) {
     var examples = {};
-    examples['application/json'] = 0;
+    examples['application/json'] = 10;
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
@@ -245,7 +245,7 @@ exports.liveCapacityPUT = function(body) {
  * userId String ID of the user booking the exercise
  * returns BookGroupExercise
  **/
-exports.BookGroupExercisePOST = function(body,userId) {
+exports.userUserIdBookGroupExercisePOST = function(body,userId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = true;
@@ -265,7 +265,7 @@ exports.BookGroupExercisePOST = function(body,userId) {
  * userId String ID of the user
  * returns ContractInformation
  **/
-exports.ContractInformationGET = function(userId) {
+exports.userUserIdContractInformationGET = function(userId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
@@ -296,14 +296,14 @@ exports.ContractInformationGET = function(userId) {
  * userId String ID of the user
  * returns PersonalDetails
  **/
-exports.PersonalDetailsPOST = function(body) {
+exports.userUserIdPersonalDetailsPOST = function(body,userId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
   "Goal" : "Goal",
   "Surname" : "Surname",
-  "Age" : 0,
-  "email" : "",
+  "Age" : 10,
+  "email" : "mail@mail.com",
   "Weight" : 1,
   "Name" : "Name",
   "Mobilenumber" : 6
@@ -316,25 +316,6 @@ exports.PersonalDetailsPOST = function(body) {
   });
 }
 
-exports.PersonalDetailsPUT = function(body,userId) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "Goal" : "Goal",
-  "Surname" : "Surname",
-  "Age" : 0,
-  "email" : "",
-  "Weight" : 1,
-  "Name" : "Name",
-  "Mobilenumber" : 6
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
-}
 
 /**
  * Invite new members
@@ -344,20 +325,17 @@ exports.PersonalDetailsPUT = function(body,userId) {
  * userId String ID of the user inviting new members
  * returns ReferralProgram
  **/
-exports.ReferralProgramPOST = function(body,userId) {
+exports.userUserIdReferralProgramPOST = function(body,userId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
-    examples['application/json'] = {
-     "ReferralCode" : "ReferralCode"
-    };
+    examples['application/json'] = "";
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
       resolve();
     }
   });
-};
-
+}
 
 
 /**
@@ -367,7 +345,7 @@ exports.ReferralProgramPOST = function(body,userId) {
  * userId String ID of the user
  * returns TrainingStats
  **/
-exports.TrainingStatsGET = function(userId) {
+exports.userUserIdTrainingStatsGET = function(userId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
@@ -382,4 +360,3 @@ exports.TrainingStatsGET = function(userId) {
     }
   });
 }
-

@@ -1,5 +1,6 @@
 'use strict';
 
+var express = require('express');
 var path = require('path');
 var http = require('http');
 
@@ -13,8 +14,10 @@ var options = {
     },
 };
 
+
 var expressAppConfig = oas3Tools.expressAppConfig(path.join(__dirname, 'api/openapi.yaml'), options);
 var app = expressAppConfig.getApp();
+
 
 // Initialize the Swagger middleware
 if (process.env.NODE_ENV !== "test") {
@@ -23,5 +26,7 @@ http.createServer(app).listen(serverPort, function () {
     console.log('Swagger-ui is available on http://localhost:%d/docs', serverPort);
 });
 }
+
+
 
 module.exports = app;

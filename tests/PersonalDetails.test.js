@@ -4,7 +4,7 @@ const http = require('http');
 const listen = require('test-listen');
 
 const app = require('../index.js');
-const { PersonalDetailsPOST , PersonalDetailsPUT } = require('../service/DefaultService');
+const { userUserIdPersonalDetailsPOST , PersonalDetailsPUT } = require('../service/DefaultService');
 
 test.before(async (t) => {
     t.context.server = http.createServer(app);
@@ -18,7 +18,7 @@ test.before(async (t) => {
 
 
   const mockUser = {
-    userID: 999,
+    userId: 999,
     PersonalDetails: {
         Name: "Name",
         Surname: "SName",
@@ -46,15 +46,18 @@ test('PUT updateUserDetails returns success response with required fields', asyn
 });
 */
 
-test('POST  addUserDetails returns success response with required fields', async (t) => {
-    const newUserID = 1456;
-    mockUser.userID = newUserID;
-    const { body, statusCode } = await t.context.got.post(`user/${mockUser.userID}/PersonalDetails`, {
+
+test('POST/ PersonalDetails returns success response', async (t) => {
+    const newUserID = 9;
+    mockUser.userId = newUserID;
+    const { body, statusCode } = await t.context.got.post(`user/${mockUser.userId}/PersonalDetails`, {
         json: mockUser.PersonalDetails,  
         responseType: 'json'
     });
+    console.log(mockUser);
    
-
+    t.is(statusCode, 200 , 'Should return 200');
+                        
     t.truthy(body.Name, 'Name should be returned in response');
     t.truthy(body.Surname, 'Surname should be returned in response');
     t.truthy(body.Age, 'Age should be returned in response');
@@ -64,6 +67,68 @@ test('POST  addUserDetails returns success response with required fields', async
     t.truthy(body.Goal, 'Goal should be returned in response');
 });
 
+
+test("Post /PersonalDetails function returns user details", async (t) => {
+     newUserID = 158;
+    const newMockUser = {
+        userId : newUserID,
+        PersonalDetails: {
+            Name: "A string",
+            Surname: "A string",
+            Age: 43,
+            email: "Astring.@mail.com",
+            Mobilenumber: 96358885,
+            Weight: 90,
+            Goal: "A string"
+        }
+    };
+
+    const User = await userUserIdPersonalDetailsPOST(newMockUser);
+    t.truthy(User.Name);
+    t.truthy(User.Surname);
+    t.truthy(User.Age);
+    t.truthy(User.Goal);
+    t.truthy(User.Weight);
+    t.truthy(User.email);
+    t.truthy(User.Mobilenumber);
+});
+
+test("Post/ PersonalDetails function returns correct headers", async (t) => {
+    const newUserID = 14;
+    mockUser.userId = newUserID;
+    const { headers, statusCode } = await t.context.got.post(`user/${mockUser.userId}/PersonalDetails`, {
+        json: mockUser.PersonalDetails,  
+    });
+    // Assertions
+    t.is(statusCode, 200, 'Should return 200 ');
+    t.truthy(headers['content-type'], 'Response should have content-type header');
+});
+
+
+    BadUserID = 660;
+    const BadMockUser = {
+        userID : BadUserID,
+        PersonalDetails: {
+            Name: 77,
+            Surname: "A string",
+            Age: 43,
+            email: "Astring.@mail.com",
+            Mobilenumber: "4444444",
+            Weight: 90,
+            Goal: "A string"
+        }
+    };
+
+test('POST PersonalDetails with invalid userId returns fail response - 400 ', async (t) => {
+    const BadUserID = 660;
+    BadMockUser.userId = BadUserID;
+    const { body, statusCode } = await t.context.got.post(`user/${BadMockUser.userId}/PersonalDetails`, {
+        json: BadMockUser,
+    });
+    // Assertions
+    t.is(statusCode, 400, 'Should return 400 Bad input type for user'); //sto api na prostheso to 400 
+
+});
 
 /*
 test('POST contactDetails returns the correct response', async (t) => {

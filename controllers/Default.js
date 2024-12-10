@@ -114,6 +114,16 @@ module.exports.getWorkoutSchedule = function getWorkoutSchedule (req, res, next,
 };
 
 module.exports.liveCapacityPUT = function liveCapacityPUT (req, res, next, body) {
+
+  if (!body || body.liveCapacity === undefined) {
+    return utils.writeJson(res, { error: 'liveCapacity is required' }, 400);
+  }
+
+  // Έλεγχος αν το liveCapacity είναι μικρότερο από 0
+  if (body.liveCapacity < 0) {
+    return utils.writeJson(res, { error: 'liveCapacity must be a positive number' }, 400);
+  }
+  
   Default.liveCapacityPUT(body)
     .then(function (response) {
       utils.writeJson(res, response);
