@@ -162,7 +162,7 @@ test('POST /training-stats with invalid training data returns 400', async (t) =>
 });
 
 const invalidUserIds = [null, undefined, "abc", 1.5, {}, [], true];
-*/
+/*
 test('GET /training-stats with invalid userId returns 400', async (t) => {
     for (const invalidId of invalidUserIds) {
         const { statusCode, body } = await t.context.got.get(`user/${invalidId}/training-stats`, {

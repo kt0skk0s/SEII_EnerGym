@@ -137,7 +137,7 @@ exports.contactInformationGET = function() {
     var examples = {};
     examples['application/json'] = {
   "Email" : "contact@info.com",
-  "PhoneNumber" : 0,
+  "PhoneNumber" : 1,
   "PhysicalAddress" : "PhysicalAddress"
 };
     if (Object.keys(examples).length > 0) {
