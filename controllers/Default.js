@@ -93,6 +93,8 @@ module.exports.eshopGET = function eshopGET (req, res, next) {
     });
 };
 
+
+
 module.exports.getAllExercises = function getAllExercises (req, res, next, searchText, filter) {
   Default.getAllExercises(searchText, filter)
     .then(function (response) {
@@ -101,7 +103,23 @@ module.exports.getAllExercises = function getAllExercises (req, res, next, searc
     .catch(function (response) {
       utils.writeJson(res, response);
     });
+
 };
+
+
+/*
+module.exports.getAllExercises = function getAllExercises (req, res, next, searchText, filter) {
+  return Default.getAllExercises(searchText, filter)
+    .then(function (response) {
+      utils.writeJson(res, response);
+      return response;  // Επιστρέφει την απόκριση για εξωτερική χρήση
+    })
+    .catch(function (error) {
+      utils.writeJson(res, error);
+      throw error;  // Πετάει το λάθος προς τα έξω, αν χρειάζεται να χειριστείς το λάθος εκτός
+    });
+};
+*/
 
 module.exports.getWorkoutSchedule = function getWorkoutSchedule (req, res, next, userID) {
   Default.getWorkoutSchedule(userID)

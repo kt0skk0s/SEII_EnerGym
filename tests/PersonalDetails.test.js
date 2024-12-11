@@ -54,7 +54,6 @@ test('POST/ PersonalDetails returns success response', async (t) => {
         json: mockUser.PersonalDetails,  
         responseType: 'json'
     });
-    console.log(mockUser);
    
     t.is(statusCode, 200 , 'Should return 200');
                         

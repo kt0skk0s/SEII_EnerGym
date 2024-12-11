@@ -375,7 +375,7 @@ paths:
         explode: true
         schema:
           type: string
-      - name: filter
+      - name: Filter
         in: query
         required: false
         style: form
@@ -383,7 +383,7 @@ paths:
         schema:
           type: array
           items:
-            $ref: '#/components/schemas/Category'
+            $ref: '#/components/schemas/Filter'
       responses:
         "200":
           description: successful operation
@@ -560,15 +560,17 @@ components:
     WorkoutSchedule:
       type: string
       description: A PDF file
-    Category:
+    Filter:
       type: object
       properties:
-        id:
-          type: integer
-          example: 1
         name:
           type: string
           example: chest
+        exercises:
+          type: array
+          items:
+            type: string
+            example: "Bench Press"
     ContractInformation_PastContracts:
       type: object
       properties:
