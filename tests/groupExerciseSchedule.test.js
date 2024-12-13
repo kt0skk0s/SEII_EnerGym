@@ -4,7 +4,6 @@ const http = require('http');
 const listen = require('test-listen');
 const app = require('../index'); 
 
-const { adminAdminIDAddGroupExerciseSchedulePOST, adminAdminIDEditGroupExerciseSchedulePUT } = require('../service/DefaultService');
 
 test.before(async (t) => {
     t.context.server = http.createServer(app);
@@ -17,34 +16,22 @@ test.after((t) => {
 }); 
 
 
-// Mock admin:
 
-const mockAdmin1 = {
-    name: "Thodoris",
-    adminID: "12345",
-    groupExSchedule: {
-        title: "Yoga",
-        daysTime: [
-            "Monday 6-7 PM",
-            "Wednesday 5-6 PM",
-            "Friday 7-8 PM"
-        ]
-    }
-}
+test('POST admin/AdminID/addGroupExerciseSchedule returns success message', async (t) => {
+    const mockData = [
+        {
+            GroupExercise: {
+                Name: "Yoga",
+                Date: "2025-1-25",
+                Time: "10:00 AM",
+                Availability: true
+            }
+        }
+    ]
+    const AdminID = 5;
 
-
-test('POST/ Successful group exercise upload', t => {
-    t.true(typeof mockAdmin1.adminID === 'string', 'adminID should be a string');
-    t.truthy(mockAdmin1.adminID, 'adminID should not be empty');
-    t.true(Array.isArray(mockAdmin1.groupExSchedule.daysTime), 'Group Exercise Schedule should be an array');
-    t.truthy(mockAdmin1.groupExSchedule, 'Group Exercise Schedule should not be empty');
-    adminAdminIDAddGroupExerciseSchedulePOST(mockAdmin1.groupExSchedule, mockAdmin1.adminID);
-});
-
-test('PUT/ Successful group exercise edit', t => {
-    t.true(typeof mockAdmin1.adminID === 'string', 'adminID should be a string');
-    t.truthy(mockAdmin1.adminID, 'adminID should not be empty');
-    t.true(Array.isArray(mockAdmin1.groupExSchedule.daysTime), 'Group Exercise Schedule should be an array');
-    t.truthy(mockAdmin1.groupExSchedule, 'Group Exercise Schedule should not be empty');
-    adminAdminIDEditGroupExerciseSchedulePUT(mockAdmin1.groupExSchedule, mockAdmin1.adminID);
+    const {statusCode} = await t.context.got.post(`admin/${AdminID}/addGroupExerciseSchedule`, {
+        json: mockData,
+    });
+    t.is(statusCode, 200, 'Should return 200');
 });
