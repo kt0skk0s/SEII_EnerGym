@@ -33,6 +33,7 @@ module.exports.adminAdminIDEditGroupExerciseSchedulePUT = function adminAdminIDE
     });
 };
 
+
 module.exports.adminAdminIDExercisesDELETE = function adminAdminIDExercisesDELETE (req, res, next, adminID, exerciseId) {
   Default.adminAdminIDExercisesDELETE(adminID, exerciseId)
     .then(function (response) {
@@ -42,6 +43,7 @@ module.exports.adminAdminIDExercisesDELETE = function adminAdminIDExercisesDELET
       utils.writeJson(res, response);
     });
 };
+
 
 module.exports.adminAdminIDExercisesPOST = function adminAdminIDExercisesPOST (req, res, next, body, adminID) {
   Default.adminAdminIDExercisesPOST(body, adminID)
@@ -163,6 +165,7 @@ module.exports.userUserIdReferralProgramPOST = function userUserIdReferralProgra
     });
 };
 
+/*
 module.exports.userUserIdTrainingStatsGET = function userUserIdTrainingStatsGET (req, res, next, userId) {
   Default.userUserIdTrainingStatsGET(userId)
     .then(function (response) {
@@ -172,3 +175,24 @@ module.exports.userUserIdTrainingStatsGET = function userUserIdTrainingStatsGET 
       utils.writeJson(res, response);
     });
 };
+*/
+
+module.exports.userUserIdTrainingStatsGET = function userUserIdTrainingStatsGET(req, res, next, userId) {
+  // Καλούμε την υπηρεσία ή την συνάρτηση που επιστρέφει τα στατιστικά του χρήστη
+  Default.userUserIdTrainingStatsGET(userId)
+    .then(function(response) {
+      // Αν δεν υπάρχουν δεδομένα για τον χρήστη, επιστρέφουμε 404
+      if (!response) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+      
+      // Αν βρέθηκαν τα στατιστικά, επιστρέφουμε 200 με τα δεδομένα
+      res.status(200).json(response);
+    })
+    .catch(function(error) {
+      // Σε περίπτωση σφάλματος, επιστρέφουμε 500 για εσωτερικό σφάλμα server
+      console.error(error);  // Καταγράφουμε το σφάλμα για debugging
+      res.status(500).json({ message: 'Internal Server Error' });
+    });
+};
+

@@ -64,11 +64,28 @@ exports.adminAdminIDEditGroupExerciseSchedulePUT = function(body,adminID) {
  * exerciseId String ID of the exercise to be removed
  * no response value expected for this operation
  **/
-exports.adminAdminIDExercisesDELETE = function(adminID,exerciseId) {
+
+exports.adminAdminIDExercisesDELETE = function(adminID,Name) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
 }
+  
+
+/*
+exports.adminAdminIDExercisesDELETE = function(adminID, exerciseId) {
+  return new Promise(function(resolve, reject) {
+      // Check if the exercise exists (this is a mock check, replace with actual logic)
+      const exerciseExists = false; // Simulate that the exercise doesn't exist
+
+      if (exerciseExists) {
+          resolve();
+      } else {
+          reject({ statusCode: 404, message: 'Exercise not found' });
+      }
+  });
+};
+*/
 
 
 /**
@@ -83,10 +100,14 @@ exports.adminAdminIDExercisesPOST = function(body,adminID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "explanationVideo" : { },
-  "exerciseImage" : "",
-  "Title" : "Title"
-};
+      "explanationVideo" : {
+         duration: "1 min",
+         videoURL: "https://www.exercise/",
+         thumbnail: "https://image"},
+      "exerciseImage" : "https://image",
+      "Title" : "Title"
+    };
+
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
@@ -94,6 +115,13 @@ exports.adminAdminIDExercisesPOST = function(body,adminID) {
     }
   });
 }
+    /*
+    examples['application/json'] = {
+  "explanationVideo" : {},
+  "exerciseImage" : 'https://workoutlabs.com/train/svg.php?id=84755',
+  "Title" : "Title"
+};
+*/
 
 
 /**
@@ -338,20 +366,21 @@ exports.userUserIdReferralProgramPOST = function(body,userId) {
 }
 
 
-/**
+/*
  * Retrieve user training statistics
  * FR11: The user should be able to view the training stats. 
  *
  * userId String ID of the user
  * returns TrainingStats
  **/
+/*
 exports.userUserIdTrainingStatsGET = function(userId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "Histogram" : "niovi",
+  "Histogram" : "Histogram",
   "TimesPerMonth" : 6,
-  "AverageTime" : 0
+  "AverageTime" : 10
 };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
@@ -360,3 +389,24 @@ exports.userUserIdTrainingStatsGET = function(userId) {
     }
   });
 }
+
+*/
+// Default.js (ή όποιο είναι το αρχείο που περιέχει την συνάρτηση)
+const users = [
+  { userId: '1234', trainingStats: { Histogram: 'Histogram' , TimesPerMonth: 6 , AverageTime: 10} },
+  { userId: '5678', trainingStats: { Histogram: 'Histo', TimesPerMonth: 2 , AverageTime: 5} }
+];
+
+module.exports.userUserIdTrainingStatsGET = function(userId) {
+  return new Promise((resolve, reject) => {
+    const user = users.find(u => u.userId === userId);
+    
+    // Αν δεν βρούμε τον χρήστη, επιστρέφουμε null
+    if (!user) {
+      return resolve(null);
+    }
+
+    // Αν βρούμε τον χρήστη, επιστρέφουμε τα στατιστικά
+    resolve(user.trainingStats);
+  });
+};

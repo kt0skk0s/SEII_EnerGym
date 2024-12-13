@@ -21,7 +21,7 @@ test.after.always((t) => {
   });
 
 test('GET /ContactInformation should return HTTP 200', async (t) => {
-    const response = await t.context.got.get('ContactInformation');
+    const response = await t.context.got.get('ContactInformation');``
   
     t.is(response.statusCode, 200, 'Should return HTTP 200');
 });
@@ -34,7 +34,7 @@ test('GET /ContactInformation should return application/json as Content-Type', a
     t.true(contentType.includes('application/json'), 'Content-Type should include application/json');
 });
 
-
+// Mporei na min xreiazetai
 test('GET /ContactInformation should return a 404 for non-existing route', async (t) => {
     const response = await t.context.got.get('NonExistingRoute');
   
@@ -76,3 +76,6 @@ test('GET /ContactInformation returns a valid physical address', async (t) => {
     t.true(typeof physicalAddress === 'string', 'Physical address should be a string');
     t.true(physicalAddress.length > 0, 'Physical address should not be empty');
 });
+
+//Na elekso oti einai swstoi oi tupoi dedomenwn
+//mock

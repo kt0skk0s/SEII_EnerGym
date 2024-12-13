@@ -85,6 +85,31 @@ paths:
               schema:
                 $ref: '#/components/schemas/ReferralProgram'
       x-swagger-router-controller: Default
+  
+  /user/{UserId}/TrainingStats:
+   get:
+     summary: Retrieve user training statistics
+     description: |
+       FR11: The user should be able to view the training stats.
+     operationId: userUserIdTrainingStatsGET
+     parameters:
+       - name: UserId
+         in: path
+         description: ID of the user
+         required: true
+         style: simple
+         explode: false
+         schema:
+           type: string
+     responses:
+       "200":
+         description: User's training statistics
+         content:
+           application/json:
+             schema:
+               $ref: '#/components/schemas/TrainingStats'
+     x-swagger-router-controller: Default
+
 
   /Eshop:
     get:
