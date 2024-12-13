@@ -154,7 +154,7 @@ exports.adminAdminIDRemoveWorkoutScheduleDELETE = function(adminID,groupExercise
 }
 
 
-/**
+/*
  * Retrieve gym's contact details
  * FR9: The user must be able to access contact details. 
  *
@@ -366,7 +366,7 @@ exports.userUserIdReferralProgramPOST = function(body,userId) {
 }
 
 
-/*
+/** 
  * Retrieve user training statistics
  * FR11: The user should be able to view the training stats. 
  *
