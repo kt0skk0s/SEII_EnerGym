@@ -2,7 +2,7 @@ const test = require('ava').default;
 const got = require('got');
 const http = require('http');
 const listen = require('test-listen');
-const app = require('../index.js');
+const app = require('../AddRemoveExercise.test.js');
 const { adminAdminIDExercisesPOST, adminAdminIDExercisesDELETE } = require('../service/DefaultService.js');
 
 test.before(async (t) => {
