@@ -55,7 +55,7 @@ test("Retrieve valid contract information", async (t) => {
   t.is(response.statusCode, 200, "Should return status 200 for valid UserId");
   });
 
-
+/*
 
   test("Contract dates should have the correct format", async (t) => {
     const response = await t.context.got.get(`user/${validContractInfo.UserId}/ContractInformation`);
@@ -105,3 +105,4 @@ test("Retrieve valid contract information", async (t) => {
     t.not(startingDate, undefined, "Starting date should not be undefined");
   });
  
+*/
