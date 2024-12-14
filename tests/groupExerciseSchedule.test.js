@@ -35,3 +35,18 @@ test('POST admin/AdminID/addGroupExerciseSchedule returns success message', asyn
     });
     t.is(statusCode, 200, 'Should return 200');
 });
+
+test('EDIT admin/AdminID/editGroupExerciseSchedule returns success message', async (t) => {
+    const mockData = {
+        Name: "Pilates",
+        Date: "2025-1-26",
+        Time: "6:00 PM",
+        Availability: true
+    }
+    const AdminID = 7;
+
+    const {statusCode} = await t.context.got.put(`admin/${AdminID}/editGroupExerciseSchedule`, {
+        json: mockData,
+    });
+    t.is(statusCode, 200, 'Should return 200');
+});
