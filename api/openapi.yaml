@@ -1,11 +1,10 @@
 openapi: 3.0.0
 info:
   title: EnerGym
-  description: EnerGym API.
+  description: EnerGym API for managing user personal details.
   version: 1.0.0
 servers:
-- url: https://virtserver.swaggerhub.com/NPERATIK_1/Energym/1.0.0
-  description: SwaggerHub API Auto Mocking
+- url: /
 paths:
   /user/{UserId}/PersonalDetails:
     post:
@@ -70,14 +69,13 @@ paths:
         style: simple
         explode: false
         schema:
-          type: string
+          type: integer
       requestBody:
         description: Details of the member to be invited
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ReferralProgram'
-        required: true
       responses:
         "200":
           description: Invitation sent successfully
@@ -86,29 +84,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ReferralProgram'
       x-swagger-router-controller: Default
-  /user/{UserId}/TrainingStats:
-    get:
-      summary: Retrieve user training statistics
-      description: |
-        FR11: The user should be able to view the training stats.
-      operationId: userUserIdTrainingStatsGET
-      parameters:
-      - name: UserId
-        in: path
-        description: ID of the user
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      responses:
-        "200":
-          description: User's training statistics
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TrainingStats'
-      x-swagger-router-controller: Default
+
   /Eshop:
     get:
       summary: Access gym's e-shop
@@ -180,7 +156,7 @@ paths:
       x-swagger-router-controller: Default
   /user/{userID}/WorkoutSchedule:
     get:
-      summary: View workout schedule
+      summary: Returns the workout schedule of the user
       description: |
         FR21: The user must be able to view his/her workout schedule.
       operationId: getWorkoutSchedule
@@ -191,7 +167,7 @@ paths:
         style: simple
         explode: false
         schema:
-          type: string
+          type: integer
       responses:
         "200":
           description: successful operation
@@ -428,7 +404,6 @@ components:
       properties:
         userID:
           type: integer
-          format: int64
         PersonalDetails:
           type: object
     PersonalDetails:
@@ -448,13 +423,10 @@ components:
           type: string
         Age:
           type: integer
-          format: int32
         email:
           type: string
-          format: email
         Mobilenumber:
           type: integer
-          format: int64
         Weight:
           type: integer
         Goal:
@@ -469,17 +441,18 @@ components:
         Mobilenumber: 6
     ContractInformation:
       required:
+      - UserId
       - PastContracts
       - endingDate
       - startingDate
       type: object
       properties:
+        UserId:
+          type: integer
         startingDate:
           type: string
-          format: date
         endingDate:
           type: string
-          format: date
         PastContracts:
           type: array
           items:
@@ -501,13 +474,10 @@ components:
       properties:
         Email:
           type: string
-          format: email
         PhysicalAddress:
           type: string
-          format: address
         PhoneNumber:
           type: integer
-          format: int64
       example:
         Email: ""
         PhoneNumber: 0
@@ -521,28 +491,31 @@ components:
       properties:
         AverageTime:
           type: integer
-          format: int32
         Histogram:
           type: string
-          format: binary
         TimesPerMonth:
           type: integer
-          format: int32
       example:
         Histogram: ""
         TimesPerMonth: 6
         AverageTime: 0
     Eshop:
       type: string
-      format: url
     ReferralProgram:
-      type: string
-      format: pattern
+      required:
+      - UserId
+      - referralCode
+      type: object
+      properties:
+        UserId:
+          type: integer
+        referralCode: 
+          type: string
+      additionalProperties: false
     BookGroupExercise:
       type: boolean
     LiveCapacity:
       type: integer
-      format: int32
     Exercise:
       required:
       - Title
@@ -555,7 +528,6 @@ components:
           description: Unique identifier for the exercise
         exerciseImage:
           type: string
-          format: binary
         explanationVideo:
           type: object
       example:
@@ -571,14 +543,11 @@ components:
       properties:
         duration:
           type: string
-          format: duration
         videoURL:
           type: string
           description: The URL of the training session video
-          format: uri
         thumbnail:
           type: string
-          format: binary
     GroupExercise:
       required:
       - Availability
@@ -593,10 +562,8 @@ components:
           type: boolean
         Date:
           type: string
-          format: date
         Time:
           type: string
-          format: time
     GroupExerciseSchedule:
       type: array
       items:
@@ -604,13 +571,11 @@ components:
     WorkoutSchedule:
       type: string
       description: A PDF file
-      format: binary
     Category:
       type: object
       properties:
         id:
           type: integer
-          format: int64
           example: 1
         name:
           type: string
@@ -620,10 +585,8 @@ components:
       properties:
         startingDate:
           type: string
-          format: date
         endingDate:
           type: string
-          format: date
       example:
         endingDate: 2000-01-23
         startingDate: 2000-01-23
@@ -650,12 +613,24 @@ components:
             $ref: '#/components/schemas/BookGroupExercise'
       required: true
     LiveCapacity:
-      description: Number of people in the gym
+      description: Number of people currently in the gym
+      required: true
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/LiveCapacity'
-      required: true
+            type: object
+            properties:
+              liveCapacity:
+                $ref: '#/components/schemas/LiveCapacity' 
+            example:
+              liveCapacity: 30
+    ReferralProgram:
+      description: Details of Referral Program
+      content:
+        application/json:
+          schema:
+              $ref: '#/components/schemas/ReferralProgram'
+    
     GroupExerciseSchedule:
       description: Details of the group exercise schedule to be added
       content:

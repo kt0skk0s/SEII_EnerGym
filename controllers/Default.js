@@ -133,6 +133,21 @@ module.exports.userUserIdBookGroupExercisePOST = function userUserIdBookGroupExe
     });
 };
 
+
+module.exports.userUserIdContractInformationGET = function userUserIdContractInformationGET(req, res, next, userId) {
+  Default.userUserIdContractInformationGET(userId)
+    .then(function (response) {
+      utils.writeJson(res, response); // Επιστρέφει την απόκριση JSON
+    })
+    .catch(function (error) {
+      res.status(error.status || 500).json({ message: error.message || "Internal Server Error" }); // Σφάλμα
+    });
+};
+
+
+  
+
+/*
 module.exports.userUserIdContractInformationGET = function userUserIdContractInformationGET (req, res, next, userId) {
   Default.userUserIdContractInformationGET(userId)
     .then(function (response) {
@@ -142,7 +157,7 @@ module.exports.userUserIdContractInformationGET = function userUserIdContractInf
       utils.writeJson(res, response);
     });
 };
-
+*/
 module.exports.userUserIdPersonalDetailsPOST = function userUserIdPersonalDetailsPOST (req, res, next, body, userId) {
   Default.userUserIdPersonalDetailsPOST(body, userId)
     .then(function (response) {
