@@ -15,10 +15,10 @@ test.before(async (t) => {
   });
 });
 
-test.after.always((t) => {
+/*test.after.always((t) => {
   t.context.server.close();
 });
-
+*/
 // Set up server
 test.before(async (t) => {
   t.context.server = http.createServer(app);
