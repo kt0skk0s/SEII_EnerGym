@@ -35,9 +35,19 @@ exports.adminAdminIDAddGroupExerciseSchedulePOST = function(body,adminID) {
  * adminID String ID of the admin added a workout Schedule
  * no response value expected for this operation
  **/
-exports.AddWorkoutSchedulePOST = function(body,adminID) {
+exports.adminAdminIDAddWorkoutSchedulePOST = function(body,adminID) {
   return new Promise(function(resolve, reject) {
-    resolve();
+    var examples = {};
+    examples['application/json'] = [ {
+  "WorkoutSchedule" : " "
+}, {
+  "WorkoutSchedule" : " "
+} ];
+    if (Object.keys(examples).length > 0) {
+      resolve(examples[Object.keys(examples)[0]]);
+    } else {
+      resolve();
+    }
   });
 }
 

@@ -16,15 +16,16 @@ test.after((t) => {
     t.context.server.close();
 });
 
-const AdminID = 31;
-const WorkoutSchedule = "Test";
-
-
 test('POST admin/{AdminID}/AddWorkoutSchedule returns success message', async (t) => {
+    const mockData = [
+        {
+            Workout: {}
+        }
+    ]
+    const AdminID = 77;
 
-    const {response} = await t.context.got.post(`admin/${AdminID}/AddWorkoutSchedule`, {
-        json: WorkoutSchedule
+    const {statusCode} = await t.context.got.post(`admin/${AdminID}/addWorkoutSchedule`, {
+        json: mockData,
     });
-
-    t.is(response, 200, 'Should return 200');
+    t.is(statusCode, 200, 'Should return 200');
 });

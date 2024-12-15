@@ -332,7 +332,11 @@ paths:
         $ref: '#/components/requestBodies/WorkoutSchedule'
       responses:
         "200":
-          description: workout schedule added
+          description: Group exercise added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkoutSchedule'
       x-swagger-router-controller: Default
   /admin/{AdminID}/RemoveWorkoutSchedule:
     delete:
@@ -558,8 +562,9 @@ components:
       items:
         $ref: '#/components/schemas/GroupExerciseSchedule_inner'
     WorkoutSchedule:
-      type: string
-      description: A PDF file
+      type: array
+      items:
+        $ref: '#/components/schemas/WorkoutSchedule_inner'
     Category:
       type: object
       properties:
@@ -586,6 +591,13 @@ components:
           type: object
       example:
         GroupExercise: {}
+    WorkoutSchedule_inner:
+      type: object
+      properties:
+        Workout:
+          type: object
+      example:
+        Workout: {}
   requestBodies:
     PersonalDetails:
       description: Personal details of the user
