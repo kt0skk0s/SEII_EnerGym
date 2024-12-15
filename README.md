@@ -1,5 +1,5 @@
 ## **EnerGym - Fitness Center** 
-# *A web application for a fitness center where you can see all the exercises , your work-out schedule , etc. *
+# A web application for a fitness center where you can see all the exercises , your work-out schedule , etc.
 
 ![logo_EnerGym-removebg-preview](https://github.com/user-attachments/assets/1b862e19-189e-4957-bef3-c6290e07e88e)
 
