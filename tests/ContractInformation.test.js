@@ -6,19 +6,6 @@ const listen = require('test-listen');
 const app = require('../index.js');
 const { userUserIdContractInformationGET } = require('../service/DefaultService.js');
 
-test.before(async (t) => {
-  t.context.server = http.createServer(app);
-  t.context.prefixUrl = await listen(t.context.server);
-  t.context.got = got.extend({
-    prefixUrl: t.context.prefixUrl,
-    throwHttpErrors: false,
-  });
-});
-
-/*test.after.always((t) => {
-  t.context.server.close();
-});
-*/
 // Set up server
 test.before(async (t) => {
   t.context.server = http.createServer(app);
@@ -55,7 +42,7 @@ test("Retrieve valid contract information", async (t) => {
   t.is(response.statusCode, 200, "Should return status 200 for valid UserId");
   });
 
-/*
+
 
   test("Contract dates should have the correct format", async (t) => {
     const response = await t.context.got.get(`user/${validContractInfo.UserId}/ContractInformation`);
@@ -105,4 +92,4 @@ test("Retrieve valid contract information", async (t) => {
     t.not(startingDate, undefined, "Starting date should not be undefined");
   });
  
-*/
+
