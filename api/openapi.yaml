@@ -69,14 +69,13 @@ paths:
         style: simple
         explode: false
         schema:
-          type: string
+          type: integer
       requestBody:
         description: Details of the member to be invited
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ReferralProgram'
-        required: true
       responses:
         "200":
           description: Invitation sent successfully
@@ -100,6 +99,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Eshop'
       x-swagger-router-controller: Default
+
   /ContactInformation:
     get:
       summary: Retrieve gym's contact details
@@ -465,11 +465,14 @@ components:
         Mobilenumber: 6
     ContractInformation:
       required:
+      - UserId
       - PastContracts
       - endingDate
       - startingDate
       type: object
       properties:
+        UserId:
+          type: integer
         startingDate:
           type: string
         endingDate:
@@ -523,7 +526,16 @@ components:
     Eshop:
       type: string
     ReferralProgram:
-      type: string
+      required:
+      - UserId
+      - referralCode
+      type: object
+      properties:
+        UserId:
+          type: integer
+        referralCode: 
+          type: string
+      additionalProperties: false
     BookGroupExercise:
       type: object
       properties:
@@ -654,6 +666,12 @@ components:
                 $ref: '#/components/schemas/LiveCapacity' 
             example:
               liveCapacity: 30
+    ReferralProgram:
+      description: Details of Referral Program
+      content:
+        application/json:
+          schema:
+              $ref: '#/components/schemas/ReferralProgram'      
 
     GroupExerciseSchedule:
       description: Details of the group exercise schedule to be added
