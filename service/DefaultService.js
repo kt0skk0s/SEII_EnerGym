@@ -9,6 +9,7 @@
  * adminID String ID of the admin adding a new Group Exercise Schedule
  * returns GroupExerciseSchedule
  **/
+<<<<<<< HEAD
 exports.AddGroupExerciseSchedulePOST = function (body, adminId) {
     return new Promise((resolve, reject) => {
         if (!body.scheduleName || !body.time || !body.days) {
@@ -33,6 +34,35 @@ exports.AddGroupExerciseSchedulePOST = function (body, adminId) {
     });
 };
 
+=======
+
+
+exports.adminAdminIDAddGroupExerciseSchedulePOST = function (body, adminID) {
+  return new Promise(function (resolve, reject) {
+    var examples = {};
+    
+    // Δημιουργούμε έναν πίνακα 5x8
+    examples['application/json'] = Array.from({ length: 5 }, (_, dayIndex) => {
+      return Array.from({ length: 8 }, (_, hourIndex) => {
+        return {
+          Name: `Exercise ${dayIndex + 1}-${hourIndex + 1}`,
+          Date: `2024-12-${16 + dayIndex}`,
+          Time: `${8 + hourIndex}:00`,
+          Availability: Math.random() > 0.5, // Τυχαία διαθεσιμότητα true/false
+        };
+      });
+    });
+  
+    if (Object.keys(examples).length > 0) {
+      resolve(examples['application/json']);
+    } else {
+      resolve();
+    }
+  });
+}
+>>>>>>> ioannidisg
+
+
 
 
 /**
@@ -43,9 +73,18 @@ exports.AddGroupExerciseSchedulePOST = function (body, adminId) {
  * adminID String ID of the admin added a workout Schedule
  * no response value expected for this operation
  **/
-exports.AddWorkoutSchedulePOST = function(body,adminID) {
+exports.adminAdminIDAddWorkoutSchedulePOST = function(body,adminID) {  
   return new Promise(function(resolve, reject) {
-    resolve();
+
+    var examples = {};
+    examples['application/json'] = {
+      "WorkoutSchedule" : "WorkoutSchedule.pdf",
+};
+    if (Object.keys(examples).length > 0) {
+      resolve(examples[Object.keys(examples)[0]]);
+    } else {
+      resolve();
+    }
   });
 }
 
@@ -58,6 +97,7 @@ exports.AddWorkoutSchedulePOST = function(body,adminID) {
  * adminID String ID of the admin editing a Group Exercise Schedule
  * no response value expected for this operation
  **/
+<<<<<<< HEAD
 exports.EditGroupExerciseSchedulePUT = function (body, adminId) {
   return new Promise((resolve, reject) => {
       if (!body.scheduleId || !body.changes) {
@@ -77,6 +117,11 @@ exports.EditGroupExerciseSchedulePUT = function (body, adminId) {
           message: 'Successful group exercise edit',
           updatedSchedule: updatedSchedule,
       });
+=======
+exports.adminAdminIDEditGroupExerciseSchedulePUT = function(body,adminID) {
+  return new Promise(function(resolve, reject) {
+    resolve();
+>>>>>>> ioannidisg
   });
 };
 
@@ -90,11 +135,24 @@ exports.EditGroupExerciseSchedulePUT = function (body, adminId) {
  * exerciseId String ID of the exercise to be removed
  * no response value expected for this operation
  **/
-exports.ExercisesDELETE = function(adminID,exerciseId) {
-  return new Promise(function(resolve, reject) {
-    resolve();
+exports.adminAdminIDExercisesDELETE = function (adminID, exerciseName, exerciseList) {
+  return new Promise(function (resolve, reject) {
+    if (!Array.isArray(exerciseList)) {
+      return reject({ statusCode: 400, message: "Invalid exercise list provided" });
+    }
+
+    const index = exerciseList.findIndex((exercise) => exercise.Title === exerciseName);
+
+    if (index !== -1) {
+      exerciseList.splice(index, 1); // Αφαίρεση από τη λίστα
+      return resolve({ message: `Exercise '${exerciseName}' deleted successfully` });
+    } else {
+      return reject({ statusCode: 404, message: `Exercise '${exerciseName}' not found` });
+    }
   });
-}
+};
+
+
 
 
 /**
@@ -105,12 +163,15 @@ exports.ExercisesDELETE = function(adminID,exerciseId) {
  * adminID String ID of the admin adding a new exercise
  * returns Exercise
  **/
-exports.ExercisesPOST = function(body,adminID) {
+exports.adminAdminIDExercisesPOST = function(body,adminID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "explanationVideo" : { },
-  "exerciseImage" : "",
+  "explanationVideo" : {            
+     duration: "1 min",
+     videoURL: "https://www.exercise",
+     thumbnail: "image"},
+  "exerciseImage" : "image",
   "Title" : "Title"
 };
     if (Object.keys(examples).length > 0) {
@@ -130,9 +191,14 @@ exports.ExercisesPOST = function(body,adminID) {
  * groupExerciseId String ID of the group exercise to be removed
  * no response value expected for this operation
  **/
-exports.RemoveGroupExerciseScheduleDELETE = function(adminID,groupExerciseId) {
+exports.adminAdminIDRemoveGroupExerciseScheduleDELETE = function(adminID,groupExerciseScedule) {
+  
   return new Promise(function(resolve, reject) {
-    resolve();
+    groupExerciseScedule = Array.from({ length: 5 }, () =>
+      Array.from({ length: 8 }, () => ({ Name: null, Date: null, Time: null, Availability: null }))
+    );
+
+    resolve(groupExerciseScedule);
   });
 }
 
@@ -144,12 +210,34 @@ exports.RemoveGroupExerciseScheduleDELETE = function(adminID,groupExerciseId) {
  * adminID String ID of the admin deleted a workout Schedule
  * groupExerciseId String ID of the workout schedule to be removed
  * no response value expected for this operation
- **/
-exports.RemoveWorkoutScheduleDELETE = function(adminID,groupExerciseId) {
+ *
+exports.adminAdminIDRemoveWorkoutScheduleDELETE = function(adminID,Workout) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
 }
+*/
+
+exports.adminAdminIDRemoveWorkoutScheduleDELETE = function (workoutToDelete, workoutSchedules) {
+  return new Promise(function (resolve, reject) {
+    // Έλεγχος αν η λίστα είναι έγκυρη
+    if (!Array.isArray(workoutSchedules)) {
+      return reject({ statusCode: 400, message: "Invalid workout schedule list provided" });
+    }
+
+    // Βρες τη θέση του προγράμματος στη λίστα
+    const index = workoutSchedules.findIndex((workout) => workout === workoutToDelete);
+
+    // Αν υπάρχει το πρόγραμμα, διαγράφεται
+    if (index !== -1) {
+      workoutSchedules.splice(index, 1); // Αφαίρεση από τη λίστα
+      return resolve({ message: `Workout '${workoutToDelete}' deleted successfully` });
+    } else {
+      // Αν το πρόγραμμα δεν βρέθηκε
+      return reject({ statusCode: 404, message: `Workout '${workoutToDelete}' not found` });
+    }
+  });
+};
 
 
 /**
@@ -162,9 +250,9 @@ exports.contactInformationGET = function() {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "Email" : "",
-  "PhoneNumber" : 0,
-  "PhysicalAddress" : "PhysicalAddress"
+      "Email" : "contact@info.com",
+      "PhoneNumber" : 1,
+      "PhysicalAddress" : "PhysicalAddress"
 };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
@@ -224,15 +312,25 @@ exports.getAllExercises = function(searchText,filter) {
 
 
 /**
- * View workout schedule
+ * Returns the workout schedule of the user
  * FR21: The user must be able to view his/her workout schedule. 
  *
- * userID String 
+ * userID Long 
  * returns List
  **/
 exports.getWorkoutSchedule = function(userID) {
   return new Promise(function(resolve, reject) {
+<<<<<<< HEAD
     resolve();
+=======
+    var examples = {};
+    examples['application/json'] = [ "Workout1.pdf", "Workout2.pdf" ];
+    if (Object.keys(examples).length > 0) {
+      resolve(examples[Object.keys(examples)[0]]);
+    } else {
+      resolve();
+    }
+>>>>>>> ioannidisg
   });
 }
 
@@ -244,10 +342,10 @@ exports.getWorkoutSchedule = function(userID) {
  * body Integer Number of people in the gym
  * returns LiveCapacity
  **/
-exports.liveCapacityPUT = function(body) {
+exports.liveCapacityPUT = function(x,body) {
   return new Promise(function(resolve, reject) {
     var examples = {};
-    examples['application/json'] = 0;
+    examples['application/json'] = x;
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
@@ -265,10 +363,25 @@ exports.liveCapacityPUT = function(body) {
  * userId String ID of the user booking the exercise
  * returns BookGroupExercise
  **/
+<<<<<<< HEAD
 exports.BookGroupExercisePOST = function (body, userId) {
   return new Promise(function (resolve, reject) {
     if (!body || !userId) {
       reject(new Error('Invalid input: body and userId are required'));
+=======
+exports.userUserIdBookGroupExercisePOST = function(body,userId) {
+  return new Promise(function(resolve, reject) {
+    var examples = {};
+    examples['application/json'] = {
+      "name": "Yoga",
+      "date": "2024-12-20",
+      "time": "10:00"
+    };
+    if (Object.keys(examples).length > 0) {
+      resolve(examples[Object.keys(examples)[0]]);
+    } else {
+      resolve();
+>>>>>>> ioannidisg
     }
 
     // Simulated booking logic (replace with real logic)
@@ -291,7 +404,7 @@ exports.BookGroupExercisePOST = function (body, userId) {
  * userId String ID of the user
  * returns ContractInformation
  **/
-exports.ContractInformationGET = function(userId) {
+exports.userUserIdContractInformationGET = function(userId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
@@ -322,14 +435,15 @@ exports.ContractInformationGET = function(userId) {
  * userId String ID of the user
  * returns PersonalDetails
  **/
-exports.PersonalDetailsPOST = function(body,userId) {
+
+exports.userUserIdPersonalDetailsPOST = function(body,userId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
   "Goal" : "Goal",
   "Surname" : "Surname",
-  "Age" : 0,
-  "email" : "",
+  "Age" : 10,
+  "email" : "mail@mail.com",
   "Weight" : 1,
   "Name" : "Name",
   "Mobilenumber" : 6
@@ -351,29 +465,17 @@ exports.PersonalDetailsPOST = function(body,userId) {
  * userId String ID of the user inviting new members
  * returns ReferralProgram
  **/
-exports.ReferralProgramPOST = function (body, userId) {
-  return new Promise((resolve, reject) => {
-      // Simulate example data only for some cases
-      const hasExamples = body !== "empty"; // A condition to differentiate the test cases
-      const examples = hasExamples
-          ? {
-                "application/json": {
-                    message: "Referral processed successfully",
-                    referredUserId: userId,
-                    details: body,
-                },
-            }
-          : {};
-
-      // Resolve based on the presence of examples
-      if (Object.keys(examples).length > 0) {
-          resolve(examples[Object.keys(examples)[0]]);
-      } else {
-          resolve(undefined); // Explicitly return undefined when no examples exist
-      }
+exports.userUserIdReferralProgramPOST = function(body,userId) {
+  return new Promise(function(resolve, reject) {
+    var examples = {};
+    examples['application/json'] = "";
+    if (Object.keys(examples).length > 0) {
+      resolve(examples[Object.keys(examples)[0]]);
+    } else {
+      resolve();
+    }
   });
-};
-
+}
 
 
 /**
@@ -383,13 +485,13 @@ exports.ReferralProgramPOST = function (body, userId) {
  * userId String ID of the user
  * returns TrainingStats
  **/
-exports.TrainingStatsGET = function(userId) {
+exports.userUserIdTrainingStatsGET = function(userId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "Histogram" : "",
+  "Histogram" : "H",
   "TimesPerMonth" : 6,
-  "AverageTime" : 0
+  "AverageTime" : 4
 };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
@@ -398,4 +500,3 @@ exports.TrainingStatsGET = function(userId) {
     }
   });
 }
-
