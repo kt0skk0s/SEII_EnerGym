@@ -4,6 +4,8 @@ const http = require('http');
 const listen = require('test-listen');
 const app = require('../index'); 
 
+const { liveCapacityPUT } = require('../service/DefaultService');
+
 
 test.before(async (t) => {
     t.context.server = http.createServer(app);
@@ -16,7 +18,6 @@ test.before(async (t) => {
   }); 
 
 
-
   test('PUT LiveGymCapacity returns success message', async (t) => {
     const mockData = {
         liveCapacity: 30, 
@@ -27,7 +28,6 @@ test.before(async (t) => {
     const {statusCode} = await t.context.got.put('LiveCapacity', {
         json: mockData, 
     });
-
     t.is(statusCode, 200, 'Should return 200');
 });
 
@@ -37,7 +37,7 @@ test('PUT LiveGymCapacity fails with missing liveCapacity', async (t) => {
     const {statusCode, body} = await t.context.got.put('LiveCapacity', {
         json: mockData,
     });
-
+    console.log(body);
     t.is(statusCode, 400, 'Should return 400    for missing liveCapacity');
 });
 
@@ -45,7 +45,7 @@ test('PUT LiveGymCapacity fails with missing liveCapacity', async (t) => {
 
 test('PUT LiveGymCapacity/ fails if negative ', async (t) => {
     const mockData = {
-        liveCapacity: -5, // Μη έγκυρη τιμή
+        liveCapacity: -5, // Μη έγκυρη τιμή δεν γινεται <0
     };
 
     const {statusCode , body}  = await t.context.got.put('LiveCapacity', {
@@ -57,6 +57,7 @@ test('PUT LiveGymCapacity/ fails if negative ', async (t) => {
     t.is(statusCode, 400, 'Should return 400 Bad Request for negative liveCapacity');
     t.is(body.error, 'liveCapacity must be a positive number');
 
+
 });
 
 test('PUT LiveGymCapacity /fails if invalid data ', async (t) => {
@@ -64,9 +65,22 @@ test('PUT LiveGymCapacity /fails if invalid data ', async (t) => {
         liveCapacity: "35", // λάθος τύπος
     };
 
-    const {statusCode, body} = await t.context.got.put('LiveCapacity', {
+    const {statusCode} = await t.context.got.put('LiveCapacity', {
         json: mockData,
     });
 
     t.is(statusCode, 400, 'Should return 400 Bad Request for invalid data type');
+
+});
+
+
+test("PUT /", async (t) => {
+    
+    // Ελέγχω την συνάρτηση που καλώ 
+    const live = await liveCapacityPUT(55);
+    console.log(live);
+
+    t.truthy(live);
+    t.is(live,55);
+
 });

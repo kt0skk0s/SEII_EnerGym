@@ -12,11 +12,15 @@ var options = {
     routing: {
         controllers: path.join(__dirname, './controllers')
     },
+    
 };
 
 
 var expressAppConfig = oas3Tools.expressAppConfig(path.join(__dirname, 'api/openapi.yaml'), options);
 var app = expressAppConfig.getApp();
+
+//app.use(express.json()); // Διαχειρίζεται JSON δεδομένα στο request body
+//app.use(express.urlencoded({ extended: true })); 
 
 
 // Initialize the Swagger middleware

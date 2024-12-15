@@ -146,7 +146,7 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/GroupExerciseName'
+        $ref: '#/components/requestBodies/BookGroupExercise'
       responses:
         "200":
           description: Group exercise booked successfully
@@ -238,7 +238,7 @@ paths:
       x-swagger-router-controller: Default
   /admin/{AdminID}/addGroupExerciseSchedule:
     post:
-      summary: Add group exercise to schedule
+      summary: Add group exercise  schedule
       description: |
         FR19: The admin should be able to add a new group exercise schedule.
       operationId: adminAdminIDAddGroupExerciseSchedulePOST
@@ -307,7 +307,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GroupExercise'
+              $ref: '#/components/schemas/GroupExerciseSchedule'
         required: true
       responses:
         "200":
@@ -327,7 +327,7 @@ paths:
         style: simple
         explode: false
         schema:
-          type: string
+          type: integer
       requestBody:
         $ref: '#/components/requestBodies/WorkoutSchedule'
       responses:
@@ -360,6 +360,29 @@ paths:
       responses:
         "200":
           description: workout schedule deleted
+      x-swagger-router-controller: Default
+  /user/{UserId}/TrainingStats:
+    get:
+      summary: Retrieve user training statistics
+      description: |
+        FR11: The user should be able to view the training stats.
+      operationId: userUserIdTrainingStatsGET
+      parameters:
+      - name: UserId
+        in: path
+        description: ID of the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: User's training statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainingStats'
       x-swagger-router-controller: Default
   /exercise:
     get:
@@ -400,10 +423,10 @@ components:
     User:
       required:
       - PersonalDetails
-      - userID
+      - UserId
       type: object
       properties:
-        userID:
+        UserId:
           type: integer
         PersonalDetails:
           type: object
@@ -502,7 +525,14 @@ components:
     ReferralProgram:
       type: string
     BookGroupExercise:
-      type: boolean
+      type: object
+      properties:
+        Name:
+          type: string
+        date:
+          type: string
+        time:
+          type: string
     LiveCapacity:
       type: integer
     Exercise:
@@ -556,10 +586,25 @@ components:
     GroupExerciseSchedule:
       type: array
       items:
-        $ref: '#/components/schemas/GroupExerciseSchedule_inner'
+        type: array
+        items:
+          type: object
+          properties: 
+            Name:
+              type: string
+            Date: 
+              type: string 
+            Time:
+              type: string
+            availability:
+              type: boolean
+
     WorkoutSchedule:
-      type: string
-      description: A PDF file
+      type: object
+      properties:
+        content:
+          type: string 
+          description: a pdf file
     Filter:
       type: object
       properties:
@@ -581,13 +626,7 @@ components:
       example:
         endingDate: 2000-01-23
         startingDate: 2000-01-23
-    GroupExerciseSchedule_inner:
-      type: object
-      properties:
-        GroupExercise:
-          type: object
-      example:
-        GroupExercise: {}
+
   requestBodies:
     PersonalDetails:
       description: Personal details of the user
@@ -596,7 +635,7 @@ components:
           schema:
             $ref: '#/components/schemas/PersonalDetails'
       required: true
-    GroupExerciseName:
+    BookGroupExercise:
       description: Details of the group exercise to be booked
       content:
         application/json:
@@ -615,6 +654,7 @@ components:
                 $ref: '#/components/schemas/LiveCapacity' 
             example:
               liveCapacity: 30
+
     GroupExerciseSchedule:
       description: Details of the group exercise schedule to be added
       content:

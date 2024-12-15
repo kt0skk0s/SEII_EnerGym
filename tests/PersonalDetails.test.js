@@ -1,3 +1,4 @@
+
 const test = require('ava').default;
 const got = require('got');
 const http = require('http');
@@ -17,39 +18,36 @@ test.before(async (t) => {
   }); 
 
 
+  ID = 999;
   const mockUser = {
-    userId: 999,
+    UserId: ID,
     PersonalDetails: {
-        Name: "Name",
-        Surname: "SName",
+        Name: "MockName",
+        Surname: "MockSurName",
         Age: 23,
-        email: "NameSN.@example.com",
+        email: "mockName.@example.com",
         Mobilenumber: 96357845,
         Weight: 70,
-        Goal: "Goal"
+        Goal: "MockGoal"
     }
 };
 
-
-/*
-test('PUT updateUserDetails returns success response with required fields', async (t) => {
-    const { body, statusCode } = await got.put(`user/${mockUser.userID}/PersonalDetails`, {
-        json: mockUser.PersonalDetails,  
-        responseType: 'json'
-    });
-    **
-    // Assertions
-    t.is(statusCode, 200, 'Should return 200 OK for successful userDetails update');
-    t.truthy(body.Age, 'Age should be returned in response');
-    t.truthy(body.Weight, 'Weight should be returned in response');
-   
-});
-*/
-
+BadUserID = 660;
+const BadMockUser = {
+    UserId : BadUserID,
+    PersonalDetails: {
+        Name: 77,
+        Surname: "A string",
+        Age: 43,
+        email: "Astring.@mail.com",
+        Mobilenumber: "4444444",
+        Weight: 90,
+        Goal: "A string"
+    }
+};
 
 test('POST/ PersonalDetails returns success response', async (t) => {
-    const newUserID = 9;
-    mockUser.userId = newUserID;
+        
     const { body, statusCode } = await t.context.got.post(`user/${mockUser.userId}/PersonalDetails`, {
         json: mockUser.PersonalDetails,  
         responseType: 'json'
@@ -64,64 +62,15 @@ test('POST/ PersonalDetails returns success response', async (t) => {
     t.truthy(body.Mobilenumber, 'Mobile number should be returned in response');
     t.truthy(body.Weight, 'Weight should be returned in response');
     t.truthy(body.Goal, 'Goal should be returned in response');
+
+    console.log('Response Body:', body);
+
 });
 
 
-test("Post /PersonalDetails function returns user details", async (t) => {
-     newUserID = 158;
-    const newMockUser = {
-        userId : newUserID,
-        PersonalDetails: {
-            Name: "A string",
-            Surname: "A string",
-            Age: 43,
-            email: "Astring.@mail.com",
-            Mobilenumber: 96358885,
-            Weight: 90,
-            Goal: "A string"
-        }
-    };
-
-    const User = await userUserIdPersonalDetailsPOST(newMockUser);
-    t.truthy(User.Name);
-    t.truthy(User.Surname);
-    t.truthy(User.Age);
-    t.truthy(User.Goal);
-    t.truthy(User.Weight);
-    t.truthy(User.email);
-    t.truthy(User.Mobilenumber);
-});
-
-test("Post/ PersonalDetails function returns correct headers", async (t) => {
-    const newUserID = 14;
-    mockUser.userId = newUserID;
-    const { headers, statusCode } = await t.context.got.post(`user/${mockUser.userId}/PersonalDetails`, {
-        json: mockUser.PersonalDetails,  
-    });
-    // Assertions
-    t.is(statusCode, 200, 'Should return 200 ');
-    t.truthy(headers['content-type'], 'Response should have content-type header');
-});
-
-
-    BadUserID = 660;
-    const BadMockUser = {
-        userID : BadUserID,
-        PersonalDetails: {
-            Name: 77,
-            Surname: "A string",
-            Age: 43,
-            email: "Astring.@mail.com",
-            Mobilenumber: "4444444",
-            Weight: 90,
-            Goal: "A string"
-        }
-    };
 
 test('POST PersonalDetails with invalid userId returns fail response - 400 ', async (t) => {
-    const BadUserID = 660;
-    BadMockUser.userId = BadUserID;
-    const { body, statusCode } = await t.context.got.post(`user/${BadMockUser.userId}/PersonalDetails`, {
+    const { body, statusCode } = await t.context.got.post(`user/${BadMockUser.UserId}/PersonalDetails`, {
         json: BadMockUser,
     });
     // Assertions
@@ -129,20 +78,67 @@ test('POST PersonalDetails with invalid userId returns fail response - 400 ', as
 
 });
 
-/*
-test('POST contactDetails returns the correct response', async (t) => {
-    const mockContactDetails = {
-        Email: "test@example.com",
-        PhoneNumber: "9655574",
-        Address: "ADdress"
-    };
-    
-    const response = await t.context.got.post('contactDetails', {
-        json: mockContactDetails
-    });
-    
-    // Assertions
-    t.is(response.statusCode, 200, 'Should return 200 OK');
-    t.deepEqual(response.body, mockContactDetails, 'Response body should match the mock contact details');
+
+test("Post /PersonalDetails function returns user details", async (t) => {
+     newUserID = 158;
+     // Ελέγχω την συνάρτηση που καλώ 
+    const User = await userUserIdPersonalDetailsPOST(newUserID);
+
+    t.truthy(User.Name);
+    t.truthy(User.Surname);
+    t.truthy(User.Age);
+    t.truthy(User.Goal);
+    t.truthy(User.Weight);
+    t.truthy(User.email);
+    t.truthy(User.Mobilenumber);
+
+    t.is(User.Name, "Name");
+    t.is(User.Age, 10);
+    t.is(User.Goal, "Goal");
 });
-*/
+
+test("Post/ PersonalDetails function returns correct headers", async (t) => {
+
+    const { headers, statusCode } = await t.context.got.post(`user/${mockUser.UserId}/PersonalDetails`, {
+        json: mockUser.PersonalDetails,  
+    });
+
+   // console.log(headers);
+    t.is(statusCode, 200, 'Should return 200 ');
+    t.truthy(headers['content-type'], );
+    //header (content-type) που δηλώνει τη μορφή των δεδομένων στην απόκριση.
+});
+
+
+
+
+    /*
+    test('POST contactDetails returns the correct response', async (t) => {
+        const mockContactDetails = {
+            Email: "test@example.com",
+            PhoneNumber: "9655574",
+            Address: "ADdress"
+        };
+        
+        const response = await t.context.got.post('contactDetails', {
+            json: mockContactDetails
+        });
+        
+        // Assertions
+        t.is(response.statusCode, 200, 'Should return 200 OK');
+        t.deepEqual(response.body, mockContactDetails, 'Response body should match the mock contact details');
+    });
+    */
+
+    
+
+
+   
+    
+
+    
+
+    
+
+
+
