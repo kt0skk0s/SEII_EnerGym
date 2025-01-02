@@ -9,32 +9,6 @@
  * adminID String ID of the admin adding a new Group Exercise Schedule
  * returns GroupExerciseSchedule
  **/
-<<<<<<< HEAD
-exports.AddGroupExerciseSchedulePOST = function (body, adminId) {
-    return new Promise((resolve, reject) => {
-        if (!body.scheduleName || !body.time || !body.days) {
-            reject({
-                message: 'Missing required fields: scheduleName, time, or days.',
-            });
-        }
-
-        // Mock data for the new schedule
-        const newSchedule = {
-            scheduleName: body.scheduleName,
-            time: body.time,
-            days: body.days,
-            adminId: adminId,
-        };
-
-        // Simulate successful addition
-        resolve({
-            message: 'Successful group exercise upload',
-            schedule: newSchedule,
-        });
-    });
-};
-
-=======
 
 
 exports.adminAdminIDAddGroupExerciseSchedulePOST = function (body, adminID) {
@@ -60,7 +34,6 @@ exports.adminAdminIDAddGroupExerciseSchedulePOST = function (body, adminID) {
     }
   });
 }
->>>>>>> ioannidisg
 
 
 
@@ -97,31 +70,9 @@ exports.adminAdminIDAddWorkoutSchedulePOST = function(body,adminID) {
  * adminID String ID of the admin editing a Group Exercise Schedule
  * no response value expected for this operation
  **/
-<<<<<<< HEAD
-exports.EditGroupExerciseSchedulePUT = function (body, adminId) {
-  return new Promise((resolve, reject) => {
-      if (!body.scheduleId || !body.changes) {
-          reject({
-              message: 'Missing required fields: scheduleId or changes.',
-          });
-      }
-
-      // Mock data for the updated schedule
-      const updatedSchedule = {
-          scheduleId: body.scheduleId,
-          ...body.changes,
-      };
-
-      // Simulate successful update
-      resolve({
-          message: 'Successful group exercise edit',
-          updatedSchedule: updatedSchedule,
-      });
-=======
 exports.adminAdminIDEditGroupExerciseSchedulePUT = function(body,adminID) {
   return new Promise(function(resolve, reject) {
     resolve();
->>>>>>> ioannidisg
   });
 };
 
@@ -320,9 +271,6 @@ exports.getAllExercises = function(searchText,filter) {
  **/
 exports.getWorkoutSchedule = function(userID) {
   return new Promise(function(resolve, reject) {
-<<<<<<< HEAD
-    resolve();
-=======
     var examples = {};
     examples['application/json'] = [ "Workout1.pdf", "Workout2.pdf" ];
     if (Object.keys(examples).length > 0) {
@@ -330,7 +278,6 @@ exports.getWorkoutSchedule = function(userID) {
     } else {
       resolve();
     }
->>>>>>> ioannidisg
   });
 }
 
@@ -363,12 +310,6 @@ exports.liveCapacityPUT = function(x,body) {
  * userId String ID of the user booking the exercise
  * returns BookGroupExercise
  **/
-<<<<<<< HEAD
-exports.BookGroupExercisePOST = function (body, userId) {
-  return new Promise(function (resolve, reject) {
-    if (!body || !userId) {
-      reject(new Error('Invalid input: body and userId are required'));
-=======
 exports.userUserIdBookGroupExercisePOST = function(body,userId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
@@ -381,7 +322,6 @@ exports.userUserIdBookGroupExercisePOST = function(body,userId) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
       resolve();
->>>>>>> ioannidisg
     }
 
     // Simulated booking logic (replace with real logic)

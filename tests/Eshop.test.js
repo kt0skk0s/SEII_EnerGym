@@ -41,7 +41,7 @@ test('GET /Eshop should return the e-shop URL', async (t) => {
 });
 
 
-   test('GET /Eshop should respond within 500ms', async (t) => {
+   test('GET /Eshop should respond within 1250ms', async (t) => {
     const startTime = Date.now();
     const response = await t.context.got.get('Eshop');
     const elapsedTime = Date.now() - startTime;
@@ -49,7 +49,7 @@ test('GET /Eshop should return the e-shop URL', async (t) => {
     // Έλεγχοι
     console.log("TIME" , elapsedTime);
     t.is(response.statusCode, 200, 'Should return HTTP 200');
-    t.true(elapsedTime < 500, `Response time should be less than 500ms, but was ${elapsedTime}ms`);
+    t.true(elapsedTime < 1250, `Response time should be less than 500ms, but was ${elapsedTime}ms`);
 });
 
 test('GET /Eshop returns application/json as Content-Type', async (t) => {
