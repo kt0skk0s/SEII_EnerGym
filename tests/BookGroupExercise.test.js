@@ -4,7 +4,7 @@ const http = require('http');
 const listen = require('test-listen');
 
 const app = require('../index');
-const { userUserIdBookGroupExercisePOST } = require('../service/DefaultService');
+const { userUserIdBookGroupExercisePOST } = require('../service/BookGroupExerciseService');
 
 test.before(async (t) => {
     t.context.server = http.createServer(app);

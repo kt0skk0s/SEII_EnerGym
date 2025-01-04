@@ -4,7 +4,7 @@ const http = require('http');
 const listen = require('test-listen');
 const app = require('../index'); 
 
-const { liveCapacityPUT } = require('../service/DefaultService');
+const { liveCapacityPUT } = require('../service/LiveGymCapacityService.js');
 
 
 test.before(async (t) => {

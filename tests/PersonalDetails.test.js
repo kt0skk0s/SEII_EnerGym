@@ -5,7 +5,7 @@ const http = require('http');
 const listen = require('test-listen');
 
 const app = require('../index.js');
-const { userUserIdPersonalDetailsPOST  } = require('../service/DefaultService');
+const { userUserIdPersonalDetailsPOST  } = require('../service/PersonalDetailsService.js');
 
 test.before(async (t) => {
     t.context.server = http.createServer(app);

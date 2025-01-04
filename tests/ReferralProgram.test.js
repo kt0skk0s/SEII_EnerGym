@@ -4,7 +4,7 @@ const http = require('http');
 const listen = require('test-listen');
 
 const app = require('../index.js');
-const { userUserIdReferralProgramPOST } = require('../service/DefaultService.js');
+const { userUserIdReferralProgramPOST } = require('../service/ReferralProgramService.js');
 
 test.before(async (t) => {
   t.context.server = http.createServer(app);
@@ -133,4 +133,13 @@ test("Referral code should not exceed maximum length", async (t) => {
 
   const maxLength = 10; // Μέγιστο μήκος
   t.falsy(mockLongRef.referralCode.length < maxLength, "Referral code should not exceed maximum length");
+});
+
+test("Post /PersonalDetails function returns referral code", async (t) => {
+     
+     // Ελέγχω την συνάρτηση που καλώ 
+    const ref = await userUserIdReferralProgramPOST(mockRef1.UserId);
+
+    t.truthy(ref.referralCode);
+
 });

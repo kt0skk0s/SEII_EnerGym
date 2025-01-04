@@ -6,7 +6,7 @@ const app = require('../index');
 const { mockExercise1, mockExercise2 ,mockExercise3,mockExercise4 } = require('../mock/mockExercises.js');
 
 
-const {getAllExercises} = require('../service/DefaultService');
+const {getAllExercises} = require('../service/SearchService.js');
 
 
 test.before(async (t) => {

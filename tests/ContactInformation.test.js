@@ -4,7 +4,7 @@ const http = require('http');
 const listen = require('test-listen'); 
 
 const app = require('../index.js');
-const { contactInformationGET } = require('../service/DefaultService.js');
+const { contactInformationGET } = require('../service/ContactInformationService.js');
 
 test.before(async (t) => {
     const app = require('../index.js'); 
@@ -77,5 +77,11 @@ test('GET /ContactInformation returns a valid physical address', async (t) => {
     t.true(physicalAddress.length > 0, 'Physical address should not be empty');
 });
 
-//Na elekso oti einai swstoi oi tupoi dedomenwn
-//mock
+
+test("GET / calling function returning ContactInformation", async (t) => {
+    const userID = 5
+  
+    const contactInformation = await contactInformationGET(userID);
+    t.truthy(contactInformation); // οτι ειναι object
+
+  });

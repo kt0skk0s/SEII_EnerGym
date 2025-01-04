@@ -3,7 +3,9 @@ const got = require('got');
 const http = require('http');
 const listen = require('test-listen');
 const app = require('../index.js');
-const { adminAdminIDExercisesPOST, adminAdminIDExercisesDELETE } = require('../service/DefaultService.js');
+// const { adminAdminIDExercisesPOST, adminAdminIDExercisesDELETE } = require('../service/DefaultService.js');
+const { adminAdminIDExercisesPOST, adminAdminIDExercisesDELETE } = require('../service/AddRemoveExerciseService.js');
+
 
 test.before(async (t) => {
     t.context.server = http.createServer(app);
@@ -89,25 +91,6 @@ test("POST /admin/{AdminID}/exercises should return an error when required field
 });
 
 
-// Test case for deleting an exercise
-
-/*
-test('DELETE /admin/{AdminID}/exercises should return HTTP 200 when removing an exercise', async (t) => {
-    const adminID = 123;
-    const Exe = [];
-    const exerciseToDelete = 'Bench Press';
-    Exe.push(exerciseToDelete);
-
-    const response = await t.context.got.delete(`admin/${adminID}/exercises`);
-    const a = adminAdminIDExercisesDELETE(exerciseToDelete,Exe);
-    
-    console.log('delete',Exe);
-    t.is(Exe.length,0); // Έχω 0 ασκήσεις
-
-    
-    //t.is(response.statusCode, 200, 'Should return HTTP 200 when removing an exercise');
-});
-*/
 test('DELETE /admin/{AdminID}/exercises should remove an exercise from the specified list', async (t) => {
   const adminID = 123; 
   const exerciseName = 'Bench Press'; 

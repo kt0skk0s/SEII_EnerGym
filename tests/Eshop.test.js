@@ -4,7 +4,7 @@ const http = require('http');
 const listen = require('test-listen'); 
 
 const app = require('../index.js');
-const { eshopGET } = require('../service/DefaultService.js');
+const { eshopGET } = require('../service/EshopService.js');
 
 
 test.before(async (t) => {    
@@ -26,11 +26,13 @@ test('GET /Eshop should return the e-shop URL', async (t) => {
     t.is(response.body, 'http://example.com/aeiou', 'Should return the correct e-shop URL');
   });
 
+
   test('GET /NonExistingRoute should return 404', async (t) => {
     const response = await t.context.got.get('NonExistingRoute');
 
     t.is(response.statusCode, 404, 'Should return HTTP 404 for a non-existing route');
   });
+
 
   test('GET /Eshop returns a valid URL string', async (t) => {
     const response = await t.context.got.get('Eshop');
@@ -59,3 +61,11 @@ test('GET /Eshop returns application/json as Content-Type', async (t) => {
     t.truthy(contentType, 'The response should have a Content-Type header');
     t.true(contentType.includes('application/json'), 'Content-Type should include application/json');
 });
+
+ test("GET / calling function returning eshop url", async (t) => {
+      const userID = 5
+    
+      const eshop = await eshopGET(userID);
+      t.truthy(eshop); 
+  
+    });

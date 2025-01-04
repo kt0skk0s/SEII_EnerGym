@@ -4,7 +4,7 @@ const http = require('http');
 const listen = require('test-listen');
 const app = require('../index'); 
 
-const {adminAdminIDAddGroupExerciseSchedulePOST ,adminAdminIDEditGroupExerciseSchedulePUT,adminAdminIDRemoveGroupExerciseScheduleDELETE } = require('../service/DefaultService');
+const {adminAdminIDAddGroupExerciseSchedulePOST ,adminAdminIDEditGroupExerciseSchedulePUT,adminAdminIDRemoveGroupExerciseScheduleDELETE } = require('../service/groupExerciseScheduleService.js');
 
 
 
@@ -242,16 +242,3 @@ test('DELETE/ Call DELETE function to ensure it resolves correctly', async (t) =
     });
 });
 
-/*
-test('EDIT / calling function - returns success message', async (t) => {
-
-
-    const result = await adminAdminIDEditGroupExerciseSchedulePUT(AdminID2);
-
-    const {statusCode} = await t.context.got.put(`admin/${AdminID2}/editGroupExerciseSchedule`, {
-        json: result,
-    });
-
-    console.log(result);
-});
-*/
