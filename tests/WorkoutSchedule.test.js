@@ -4,7 +4,7 @@ const http = require('http');
 const listen = require('test-listen');
 
 const app = require('../index'); 
-const { adminAdminIDAddWorkoutSchedulePOST ,getWorkoutSchedule , adminAdminIDRemoveWorkoutScheduleDELETE } = require('../service/DefaultService');
+const { adminAdminIDAddWorkoutSchedulePOST ,getWorkoutSchedule , adminAdminIDRemoveWorkoutScheduleDELETE } = require('../service/WorkoutScheduleService.js');
 
 test.before(async (t) => {
     t.context.server = http.createServer(app);
