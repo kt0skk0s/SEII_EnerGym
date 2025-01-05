@@ -1,3 +1,5 @@
+'use strict'
+
 /**
  * Retrieve contract information
  * FR10: The user should be able to view the date that the contract starts/ends. 

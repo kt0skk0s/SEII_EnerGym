@@ -1,3 +1,4 @@
+'use strict'
 /**
  * Add group exercise to schedule
  * FR19: The admin should be able to add a new group exercise schedule. 

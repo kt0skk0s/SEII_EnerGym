@@ -1,3 +1,5 @@
+'use strict'
+
 /**
  * Book a group exercise
  * FR6: The user should be able to book a group exercise. 
