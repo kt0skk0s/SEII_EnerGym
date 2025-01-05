@@ -4,7 +4,7 @@ const http = require('http');
 const listen = require('test-listen');
 
 const app = require('../index.js');
-const { userUserIdContractInformationGET } = require('../service/DefaultService.js');
+const { userUserIdContractInformationGET } = require('../service/ContractInformationService.js');
 
 // Set up server
 test.before(async (t) => {
@@ -92,3 +92,10 @@ test("Retrieve valid contract information", async (t) => {
     t.not(startingDate, undefined, "Starting date should not be undefined");
   });
  
+  test("GET / calling function returning Contrct Information", async (t) => {
+      const userID = 5
+    
+      const contractInformation = await userUserIdContractInformationGET(userID);
+      t.truthy(contractInformation); // οτι ειναι object
+  
+    });

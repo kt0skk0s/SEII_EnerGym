@@ -4,7 +4,7 @@ const http = require('http');
 const listen = require('test-listen');
 const app = require('../index'); 
 
-const {adminAdminIDAddGroupExerciseSchedulePOST ,adminAdminIDEditGroupExerciseSchedulePUT,adminAdminIDRemoveGroupExerciseScheduleDELETE } = require('../service/DefaultService');
+const {adminAdminIDAddGroupExerciseSchedulePOST ,adminAdminIDEditGroupExerciseSchedulePUT,adminAdminIDRemoveGroupExerciseScheduleDELETE } = require('../service/groupExerciseScheduleService.js');
 
 
 

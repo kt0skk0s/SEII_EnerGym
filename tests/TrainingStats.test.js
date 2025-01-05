@@ -4,7 +4,7 @@ const http = require('http');
 const listen = require('test-listen'); 
 
 const app = require('../index.js');
-const { userUserIdTrainingStatsGET } = require('../service/DefaultService.js');
+const { userUserIdTrainingStatsGET } = require('../service/TrainingStatsService.js');
 
 test.before(async (t) => {
     const app = require('../index.js'); 

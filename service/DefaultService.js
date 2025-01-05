@@ -74,7 +74,8 @@ exports.adminAdminIDEditGroupExerciseSchedulePUT = function(body,adminID) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
-}
+};
+
 
 
 /**
@@ -322,8 +323,18 @@ exports.userUserIdBookGroupExercisePOST = function(body,userId) {
     } else {
       resolve();
     }
+
+    // Simulated booking logic (replace with real logic)
+    const bookingDetails = {
+      success: true,
+      message: 'Booking confirmed',
+      userId: userId,
+      details: body,
+    };
+
+    resolve(bookingDetails);
   });
-}
+};
 
 
 /**
