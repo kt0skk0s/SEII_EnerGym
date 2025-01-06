@@ -1,5 +1,7 @@
 'use strict';
 
+var schedule = require('../mock/mockShedule.js'); // Import του mock schedule
+var utils_Av = require('../utils/Availability.js');
 var utils = require('../utils/writer.js');
 var Default = require('../service/BookGroupExerciseService.js');
 

@@ -31,7 +31,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PersonalDetails'
-      x-swagger-router-controller: Default
+      x-swagger-router-controller: PersonalDetails
   /user/{UserId}/ContractInformation:
     get:
       summary: Retrieve contract information
@@ -54,7 +54,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ContractInformation'
-      x-swagger-router-controller: Default
+      x-swagger-router-controller: ContractInformation
   /user/{UserId}/ReferralProgram:
     post:
       summary: Invite new members
@@ -83,7 +83,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ReferralProgram'
-      x-swagger-router-controller: Default
+      x-swagger-router-controller: ReferralProgram
 
   /Eshop:
     get:
@@ -98,7 +98,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Eshop'
-      x-swagger-router-controller: Default
+      x-swagger-router-controller: Eshop
 
   /ContactInformation:
     get:
@@ -113,7 +113,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ContactInformation'
-      x-swagger-router-controller: Default
+      x-swagger-router-controller: ContactInformation
   /LiveCapacity:
     put:
       summary: Update live gym capacity
@@ -129,7 +129,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LiveCapacity'
-      x-swagger-router-controller: Default
+      x-swagger-router-controller: LiveGymCapacity
   /user/{UserId}/BookGroupExercise:
     post:
       summary: Book a group exercise
@@ -154,7 +154,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BookGroupExercise'
-      x-swagger-router-controller: Default
+      x-swagger-router-controller: BookGroupExercise
   /user/{userID}/WorkoutSchedule:
     get:
       summary: Returns the workout schedule of the user
@@ -179,7 +179,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/WorkoutSchedule'
                 x-content-type: application/json
-      x-swagger-router-controller: Default
+      x-swagger-router-controller: WorkoutSchedule
   /admin/{AdminID}/exercises:
     post:
       summary: Add new exercise
@@ -209,7 +209,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Exercise'
-      x-swagger-router-controller: Default
+      x-swagger-router-controller: AddRemoveExercise
     delete:
       summary: Remove exercise
       description: |
@@ -235,7 +235,7 @@ paths:
       responses:
         "200":
           description: Exercise removed successfully
-      x-swagger-router-controller: Default
+      x-swagger-router-controller: AddRemoveExercise
   /admin/{AdminID}/addGroupExerciseSchedule:
     post:
       summary: Add group exercise  schedule
@@ -260,7 +260,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GroupExerciseSchedule'
-      x-swagger-router-controller: Default
+      x-swagger-router-controller: groupExerciseSchedule
   /admin/{AdminID}/removeGroupExerciseSchedule:
     delete:
       summary: Remove group exercise from schedule
@@ -287,7 +287,7 @@ paths:
       responses:
         "204":
           description: Group exercise removed successfully
-      x-swagger-router-controller: Default
+      x-swagger-router-controller: groupExerciseSchedule
   /admin/{AdminID}/editGroupExerciseSchedule:
     put:
       summary: Edit group exercise in schedule
@@ -312,7 +312,7 @@ paths:
       responses:
         "200":
           description: Group exercise edited successfully
-      x-swagger-router-controller: Default
+      x-swagger-router-controller: groupExerciseSchedule
   /admin/{AdminID}/AddWorkoutSchedule:
     post:
       summary: Add a workout schedule for a user
@@ -333,7 +333,7 @@ paths:
       responses:
         "200":
           description: workout schedule added
-      x-swagger-router-controller: Default
+      x-swagger-router-controller: WorkoutSchedule
   /admin/{AdminID}/RemoveWorkoutSchedule:
     delete:
       summary: Delete a workout schedule for a user
@@ -360,7 +360,7 @@ paths:
       responses:
         "200":
           description: workout schedule deleted
-      x-swagger-router-controller: Default
+      x-swagger-router-controller: WorkoutSchedule
   /user/{UserId}/TrainingStats:
     get:
       summary: Retrieve user training statistics
@@ -383,7 +383,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TrainingStats'
-      x-swagger-router-controller: Default
+      x-swagger-router-controller: TrainingStats
   /exercise:
     get:
       summary: Returns all exercises
@@ -417,7 +417,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Exercise'
                 x-content-type: application/json
-      x-swagger-router-controller: Default
+      x-swagger-router-controller: Search
 components:
   schemas:
     User:
