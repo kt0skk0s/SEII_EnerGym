@@ -85,5 +85,3 @@ test("GET / TrainingStats calling function retrieves workout schedules", async (
 
   });
 
-//na prosthesw an exw kena dedomena
-//api(components) - userid
