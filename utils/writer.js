@@ -1,8 +1,10 @@
+// Constructor του ResponsePayload 
 var ResponsePayload = function(code, payload) {
   this.code = code;
   this.payload = payload;
 }
 
+// Συνάρτηση για να επιστρέφει τα ορίσματα της ResponsePayload
 exports.respondWithCode = function(code, payload) {
   return new ResponsePayload(code, payload);
 }
@@ -11,6 +13,7 @@ var writeJson = exports.writeJson = function(response, arg1, arg2) {
   var code;
   var payload;
 
+  // έλεγχος αν η πρώτη παράμετρος ειναι ορισμένη και αν αποτελεί στιγμιότυπο της κλάσης
   if(arg1 && arg1 instanceof ResponsePayload) {
     writeJson(response, arg1.payload, arg1.code);
     return;
@@ -24,6 +27,7 @@ var writeJson = exports.writeJson = function(response, arg1, arg2) {
       code = arg1;
     }
   }
+
   if(code && arg1) {
     payload = arg1;
   }
