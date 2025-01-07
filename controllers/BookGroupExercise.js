@@ -10,7 +10,7 @@ var Default = require('../service/BookGroupExerciseService.js');
  * @module BookGroupExercise
  */
 
-module.exports.userUserIdBookGroupExercisePOST = function userUserIdBookGroupExercisePOST (_, res, _, body, userId) {
+module.exports.userUserIdBookGroupExercisePOST = function userUserIdBookGroupExercisePOST (req, res, next, body, userId) {
     //console.log(JSON.stringify(schedule, null, 2));
     const x = utils_Av.isAvailable(schedule, body);  // isAvailable -> συνάρτηση ελέγχου διαθεσημης θέσης
    // console.log("Availability Check Result:", x);

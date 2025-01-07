@@ -8,7 +8,7 @@ var Default = require('../service/WorkoutScheduleService.js');
  * @module WorkoutSchedule
  */
 
-module.exports.adminAdminIDAddWorkoutSchedulePOST = function adminAdminIDAddWorkoutSchedulePOST (_, res, _, body, adminID) {
+module.exports.adminAdminIDAddWorkoutSchedulePOST = function adminAdminIDAddWorkoutSchedulePOST (req, res, next, body, adminID) {
 
   if (!body || typeof body.WorkoutSchedule !== "string" || body.WorkoutSchedule === undefined ) {
     return utils.writeJson(res, { message: "WorkoutSchedule must be a string" }, 400);

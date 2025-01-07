@@ -8,7 +8,7 @@ var Default = require('../service/LiveGymCapacityService.js');
  * @module LiveGymCapacity
  */
 
-module.exports.liveCapacityPUT = function liveCapacityPUT (_, res, _, body) {
+module.exports.liveCapacityPUT = function liveCapacityPUT (req, res, next, body) {
 
   if (!body || body.liveCapacity === undefined) {
     return utils.writeJson(res, { error: 'liveCapacity is required' }, 400);

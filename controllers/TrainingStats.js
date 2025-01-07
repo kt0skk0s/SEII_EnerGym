@@ -8,7 +8,7 @@ var Default = require('../service/TrainingStatsService.js');
  * @module TrainingStats
  */
 
-module.exports.userUserIdTrainingStatsGET = function userUserIdTrainingStatsGET (_, res, _, userId) {
+module.exports.userUserIdTrainingStatsGET = function userUserIdTrainingStatsGET (req, res, next, userId) {
   Default.userUserIdTrainingStatsGET(userId)
     .then(function (response) {
       utils.writeJson(res, response);
