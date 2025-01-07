@@ -3,6 +3,11 @@
 var utils = require('../utils/writer.js');
 var Default = require('../service/PersonalDetailsService.js');
 
+/**
+ * Controller for managing Personal Details
+ * @module PersonalDetails
+ */
+
 module.exports.userUserIdPersonalDetailsPOST = function userUserIdPersonalDetailsPOST (req, res, next, body, userId) {
   Default.userUserIdPersonalDetailsPOST(body, userId)
     .then(function (response) {

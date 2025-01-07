@@ -3,6 +3,11 @@
 var utils = require('../utils/writer.js');
 var Default = require('../service/EshopService.js');
 
+/**
+ * Controller for managing Eshop
+ * @module Eshop
+ */
+
 module.exports.eshopGET = function eshopGET (req, res, next) {
   Default.eshopGET()
     .then(function (response) {

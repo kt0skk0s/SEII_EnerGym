@@ -3,6 +3,11 @@
 var utils = require('../utils/writer.js');
 var Default = require('../service/WorkoutScheduleService.js');
 
+/**
+ * Controller for managing Workout Schedules
+ * @module WorkoutSchedule
+ */
+
 module.exports.adminAdminIDAddWorkoutSchedulePOST = function adminAdminIDAddWorkoutSchedulePOST (req, res, next, body, adminID) {
 
   if (!body || typeof body.WorkoutSchedule !== "string" || body.WorkoutSchedule === undefined ) {

@@ -3,6 +3,11 @@
 var utils = require('../utils/writer.js');
 var AddRemoveExercise = require('../service/AddRemoveExerciseService.js');
 
+/**
+ * Controller for managing Exercises
+ * @module AddRemoveExercise
+ */
+
 module.exports.adminAdminIDExercisesDELETE = function adminAdminIDExercisesDELETE (req, res, next, adminID, exerciseId) {
     AddRemoveExercise.adminAdminIDExercisesDELETE(adminID, exerciseId)
     .then(function (response) {

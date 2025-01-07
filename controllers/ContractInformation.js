@@ -3,6 +3,11 @@
 var utils = require('../utils/writer.js');
 var Default = require('../service/ContractInformationService.js');
 
+/**
+ * Controller for managing Contract information
+ * @module Contractinformation
+ */
+
 module.exports.userUserIdContractInformationGET = function userUserIdContractInformationGET(req, res, next, userId) {
   Default.userUserIdContractInformationGET(userId)
     .then(function (response) {

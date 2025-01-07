@@ -5,9 +5,14 @@ var utils_Av = require('../utils/Availability.js');
 var utils = require('../utils/writer.js');
 var Default = require('../service/BookGroupExerciseService.js');
 
+/**
+ * Controller for managing Group Exercises
+ * @module BookGroupExercise
+ */
+
 module.exports.userUserIdBookGroupExercisePOST = function userUserIdBookGroupExercisePOST (req, res, next, body, userId) {
     //console.log(JSON.stringify(schedule, null, 2));
-    const x = utils_Av.isAvailable(schedule, body);
+    const x = utils_Av.isAvailable(schedule, body);  // isAvailable -> συνάρτηση ελέγχου διαθεσημης θέσης
    // console.log("Availability Check Result:", x);
   
     if (x===false) { //ελεγχω αν εχω availability

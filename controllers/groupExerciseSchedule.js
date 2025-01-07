@@ -3,6 +3,11 @@
 var utils = require('../utils/writer.js');
 var Default = require('../service/groupExerciseScheduleService.js');
 
+/**
+ * Controller for managing Group Exercise Shedules
+ * @module groupExerciseShedule
+ */
+
 module.exports.adminAdminIDAddGroupExerciseSchedulePOST = function adminAdminIDAddGroupExerciseSchedulePOST (req, res, next, body, adminID) {
 
   if (

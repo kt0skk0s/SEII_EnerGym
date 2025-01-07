@@ -3,6 +3,11 @@
 var utils = require('../utils/writer.js');
 var Default = require('../service/LiveGymCapacityService.js');
 
+/**
+ * Controller for managing Live Gym's Capacity
+ * @module LiveGymCapacity
+ */
+
 module.exports.liveCapacityPUT = function liveCapacityPUT (req, res, next, body) {
 
   if (!body || body.liveCapacity === undefined) {
