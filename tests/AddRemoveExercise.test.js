@@ -3,7 +3,6 @@ const got = require('got');
 const http = require('http');
 const listen = require('test-listen');
 const app = require('../index.js');
-// const { adminAdminIDExercisesPOST, adminAdminIDExercisesDELETE } = require('../service/DefaultService.js');
 const { adminAdminIDExercisesPOST, adminAdminIDExercisesDELETE } = require('../service/AddRemoveExerciseService.js');
 
 
@@ -20,7 +19,7 @@ test.after.always((t) => {
     t.context.server.close();
 });
 
-//se allo test na elegjo an bgazei tin idia askisi
+
 
   let AllExercises = [];
 

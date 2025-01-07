@@ -19,32 +19,35 @@ test.after((t) => {
 
 const UserId = 1;
 
+// Έγκυρα δεδομένα για κρατηση σε ομαδική άσκηση
 const validBookingRequest = {
     name: "TRX",
     date: "2024-12-16",
     time: "08:00"
 };
 
+// Υποθέτουμε ότι η συγκεκριμένη ώρα είναι πλήρης.
 const invalidBookingRequest = {
     name: "Yoga",
     date: "2024-12-16",
     time: "09:00"
-}; // Υποθέτουμε ότι η συγκεκριμένη ώρα είναι πλήρης.
+}; 
 
+//Ελειπής δεδομένα κράτησης σε ομαδική άσκηση
 const incompleteBookingRequest = {
     name: "Yoga Class",
     date: undefined,
     time: "Pilates"
-};
+}; 
 
-
+//Μη έγκυρα δεδομένα κράτησης σε ομαδική άσκηση
 const WrongBookingRequest = {
     name: "Yoga Class",
     date: "2026-12-16",
     time: "Pilates"
 };
 
-// Δημιουργησω μια συναρτηση που ελεγχει το availability 
+// Δημιουργησα μια συναρτηση που ελεγχει το availability 
 // και δεν εχω availability true ή αν δεν βρισκει σωστη ημερομηνια επιστρεφει 400
 
 
@@ -53,7 +56,7 @@ test('POST Book Group Exercise - Successful booking', async (t) => {
         json: validBookingRequest
     });
 
-    // ελενχω πρωτα αν ειναι οκαυ τα δεδομενα που εδωσε ο χρηστης 
+    // ελεχω πρωτα αν ειναι οκαυ τα δεδομενα που εδωσε ο χρηστης 
     t.is(response.statusCode, 200, 'Should return 200');
     t.truthy(response.body.name);
     t.truthy(response.body.date);
