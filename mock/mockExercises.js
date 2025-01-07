@@ -1,3 +1,4 @@
+//Δημιουργία της πρώτης εικονικής άσκησης
 const mockExercise1 = {
     Title: "Bench Press",
     exerciseImage: "https://workoutlabs.com/train/svg.php?id=84755",
@@ -8,6 +9,7 @@ const mockExercise1 = {
     }
 };
 
+//Δημιουργία της δεύτερης εικονικής άσκησης
 const mockExercise2 = {
     Title: "Incline Bench Press",
     exerciseImage: "https://homegymreview.co.uk/wp-content/uploads/exercises/11731101-Barbell-Incline-Wide-Reverse-grip-Bench-Press_Chest_max-scaled.jpg",
@@ -18,6 +20,7 @@ const mockExercise2 = {
     }
 };
 
+//Δημιουργία της τρίτης εικονικής άσκησης
 const mockExercise3 = {
     Title: "Leg extensions",
     exerciseImage: "https://training.fit/wp-content/uploads/2020/03/beinstrecken-geraet-1.png",
@@ -28,6 +31,7 @@ const mockExercise3 = {
     }
 };
 
+//Δημιουργία της τέταρτης εικονικής άσκησης
 const mockExercise4 = {
     Title: "Leg press",
     exerciseImage: "https://fitlineequipment.com/wp-content/uploads/2019/05/Precor-DPL0601-Angled-Leg-Press-4.jpg",
