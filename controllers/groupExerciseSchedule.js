@@ -8,7 +8,7 @@ var Default = require('../service/groupExerciseScheduleService.js');
  * @module groupExerciseShedule
  */
 
-module.exports.adminAdminIDAddGroupExerciseSchedulePOST = function adminAdminIDAddGroupExerciseSchedulePOST (req, res, next, body, adminID) {
+module.exports.adminAdminIDAddGroupExerciseSchedulePOST = function adminAdminIDAddGroupExerciseSchedulePOST (_, res, _, body, adminID) {
 
   if (
     !Array.isArray(body) || // Πρέπει να είναι πίνακας
@@ -32,7 +32,7 @@ module.exports.adminAdminIDAddGroupExerciseSchedulePOST = function adminAdminIDA
 };
 
 
-module.exports.adminAdminIDEditGroupExerciseSchedulePUT = function adminAdminIDEditGroupExerciseSchedulePUT (req, res, next, body, adminID) {
+module.exports.adminAdminIDEditGroupExerciseSchedulePUT = function adminAdminIDEditGroupExerciseSchedulePUT (_, res, _, body, adminID) {
   Default.adminAdminIDEditGroupExerciseSchedulePUT(body, adminID)
     .then(function (response) {
       utils.writeJson(res, response);
@@ -42,7 +42,7 @@ module.exports.adminAdminIDEditGroupExerciseSchedulePUT = function adminAdminIDE
     });
 };
 
-module.exports.adminAdminIDRemoveGroupExerciseScheduleDELETE = function adminAdminIDRemoveGroupExerciseScheduleDELETE (req, res, next, adminID, groupExerciseId) {
+module.exports.adminAdminIDRemoveGroupExerciseScheduleDELETE = function adminAdminIDRemoveGroupExerciseScheduleDELETE (_, res, _, adminID, groupExerciseId) {
   Default.adminAdminIDRemoveGroupExerciseScheduleDELETE(adminID, groupExerciseId)
     .then(function (response) {
       utils.writeJson(res, response);

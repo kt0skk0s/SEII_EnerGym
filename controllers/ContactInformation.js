@@ -8,7 +8,7 @@ var Default = require('../service/ContactInformationService.js');
  * @module Contactinformation
  */
 
-module.exports.contactInformationGET = function contactInformationGET (req, res, next) {
+module.exports.contactInformationGET = function contactInformationGET (_, res, _) {
   Default.contactInformationGET()
     .then(function (response) {
       utils.writeJson(res, response);

@@ -18,7 +18,7 @@ module.exports.adminAdminIDExercisesDELETE = function adminAdminIDExercisesDELET
     });
 };
 
-module.exports.adminAdminIDExercisesPOST = function adminAdminIDExercisesPOST (req, res, next, body, adminID) {
+module.exports.adminAdminIDExercisesPOST = function adminAdminIDExercisesPOST (_, res, _, body, adminID) {
     AddRemoveExercise.adminAdminIDExercisesPOST(body, adminID)
     .then(function (response) {
       utils.writeJson(res, response);
