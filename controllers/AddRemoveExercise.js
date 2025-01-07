@@ -8,7 +8,7 @@ var AddRemoveExercise = require('../service/AddRemoveExerciseService.js');
  * @module AddRemoveExercise
  */
 
-module.exports.adminAdminIDExercisesDELETE = function adminAdminIDExercisesDELETE (req, res, next, adminID, exerciseId) {
+module.exports.adminAdminIDExercisesDELETE = function adminAdminIDExercisesDELETE (_, res, _, adminID, exerciseId) {
     AddRemoveExercise.adminAdminIDExercisesDELETE(adminID, exerciseId)
     .then(function (response) {
       utils.writeJson(res, response);
