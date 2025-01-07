@@ -1,47 +1,38 @@
-// Constructor του ResponsePayload 
-var ResponsePayload = function(code, payload) {
-  this.code = code;
-  this.payload = payload;
+// Constructor του ResponsePayload
+class ResponsePayload {
+  constructor(code, payload) {
+    this.code = code;
+    this.payload = payload;
+  }
 }
 
 // Συνάρτηση για να επιστρέφει τα ορίσματα της ResponsePayload
-exports.respondWithCode = function(code, payload) {
+exports.respondWithCode = function (code, payload) {
   return new ResponsePayload(code, payload);
+};
+
+// Συνάρτηση για να ορίσει τον response κώδικα
+function determineResponseCode(arg1, arg2) {
+  if (arg2 && Number.isInteger(arg2)) return arg2;
+  if (arg1 && Number.isInteger(arg1)) return arg1;
+  return 200; // Default response code
 }
 
-var writeJson = exports.writeJson = function(response, arg1, arg2) {
-  var code;
-  var payload;
+// Συνάρτηση για να ορίσει το payload
+function determinePayload(arg1) {
+  return arg1 && typeof arg1 === 'object' ? JSON.stringify(arg1, null, 2) : arg1;
+}
 
-  // έλεγχος αν η πρώτη παράμετρος ειναι ορισμένη και αν αποτελεί στιγμιότυπο της κλάσης
-  if(arg1 && arg1 instanceof ResponsePayload) {
-    writeJson(response, arg1.payload, arg1.code);
-    return;
-  }
-
-  if(arg2 && Number.isInteger(arg2)) {
-    code = arg2;
-  }
-  else {
-    if(arg1 && Number.isInteger(arg1)) {
-      code = arg1;
-    }
+// Απλοποιημένη writeJson συνάρτηση
+exports.writeJson = function (response, arg1, arg2) {
+  if (arg1 instanceof ResponsePayload) {
+    return exports.writeJson(response, arg1.payload, arg1.code);
   }
 
-  if(code && arg1) {
-    payload = arg1;
-  }
-  else if(arg1) {
-    payload = arg1;
-  }
+  const code = determineResponseCode(arg1, arg2);
+  const payload = determinePayload(arg1);
 
-  if(!code) {
-    // if no response code given, we default to 200
-    code = 200;
-  }
-  if(typeof payload === 'object') {
-    payload = JSON.stringify(payload, null, 2);
-  }
-  response.writeHead(code, {'Content-Type': 'application/json'});
+  response.writeHead(code, { 'Content-Type': 'application/json' });
   response.end(payload);
-}
+};
+
