@@ -23,7 +23,7 @@ const validBookingRequest = {
     name: "TRX",
     date: "2024-12-16",
     time: "08:00"
-};
+}; // Σωστή κράτηση 
 
 const invalidBookingRequest = {
     name: "Yoga",
@@ -35,14 +35,14 @@ const incompleteBookingRequest = {
     name: "Yoga Class",
     date: undefined,
     time: "Pilates"
-};
+}; // Ελειπής κράτηση
 
 
 const WrongBookingRequest = {
     name: "Yoga Class",
     date: "2026-12-16",
     time: "Pilates"
-};
+}; // Λάθος κράτηση
 
 // Δημιουργησω μια συναρτηση που ελεγχει το availability 
 // και δεν εχω availability true ή αν δεν βρισκει σωστη ημερομηνια επιστρεφει 400
