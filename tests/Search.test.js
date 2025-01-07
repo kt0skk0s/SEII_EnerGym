@@ -3,6 +3,7 @@ const got = require('got');
 const http = require('http');
 const listen = require('test-listen');
 const app = require('../index'); 
+// Δηλώση εικονικών ασκήσεων απο το αρχείο mockExercises.js 
 const { mockExercise1, mockExercise2 ,mockExercise3,mockExercise4 } = require('../mock/mockExercises.js');
 
 
