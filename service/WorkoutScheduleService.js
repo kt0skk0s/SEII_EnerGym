@@ -10,9 +10,12 @@ exports.adminAdminIDAddWorkoutSchedulePOST = function(body,adminID) {
     return new Promise(function(resolve, reject) {
   
       var examples = {};
-      examples['application/json'] = {
-        "WorkoutSchedule" : "WorkoutSchedule.pdf",
-  };
+      if(body && adminID) {
+          examples['application/json'] = {
+          "WorkoutSchedule" : "WorkoutSchedule.pdf",
+        };
+      }
+
       if (Object.keys(examples).length > 0) {
         resolve(examples[Object.keys(examples)[0]]);
       } else {
@@ -32,7 +35,10 @@ exports.adminAdminIDAddWorkoutSchedulePOST = function(body,adminID) {
 exports.getWorkoutSchedule = function(userID) {
     return new Promise(function(resolve, reject) {
       var examples = {};
-      examples['application/json'] = [ "Workout1.pdf", "Workout2.pdf" ];
+      if(userID) {
+        examples['application/json'] = [ "Workout1.pdf", "Workout2.pdf" ];
+      }
+     
       if (Object.keys(examples).length > 0) {
         resolve(examples[Object.keys(examples)[0]]);
       } else {

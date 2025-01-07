@@ -11,11 +11,13 @@
 exports.userUserIdBookGroupExercisePOST = function(body,userId) {
     return new Promise(function(resolve, reject) {
       var examples = {};
+      if(body && userId) {
       examples['application/json'] = {
         "name": "Yoga",
         "date": "2024-12-20",
         "time": "10:00"
       };
+    }
       if (Object.keys(examples).length > 0) {
         resolve(examples[Object.keys(examples)[0]]);
       } else {

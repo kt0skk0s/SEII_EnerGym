@@ -74,7 +74,7 @@ test('PUT LiveGymCapacity /fails if invalid data ', async (t) => {
 });
 
 
-test("PUT /", async (t) => {
+test("PUT / Function test", async (t) => {
     
     // Ελέγχω την συνάρτηση που καλώ 
     const live = await liveCapacityPUT(55);

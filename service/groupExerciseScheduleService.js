@@ -11,7 +11,7 @@
 exports.adminAdminIDAddGroupExerciseSchedulePOST = function (body, adminID) {
     return new Promise(function (resolve, reject) {
       var examples = {};
-      
+      if(body && adminID) {
       // Δημιουργούμε έναν πίνακα 5x8
       examples['application/json'] = Array.from({ length: 5 }, (_, dayIndex) => {
         return Array.from({ length: 8 }, (_, hourIndex) => {
@@ -23,6 +23,7 @@ exports.adminAdminIDAddGroupExerciseSchedulePOST = function (body, adminID) {
           };
         });
       });
+    }
     
       if (Object.keys(examples).length > 0) {
         resolve(examples['application/json']);
@@ -42,9 +43,11 @@ exports.adminAdminIDAddGroupExerciseSchedulePOST = function (body, adminID) {
  * no response value expected for this operation
  **/
 exports.adminAdminIDEditGroupExerciseSchedulePUT = function(body,adminID) {
-    return new Promise(function(resolve, reject) {
-      resolve();
-    });
+    if(body,adminID){
+      return new Promise(function(resolve, reject) {
+        resolve();
+      });
+    }
   };
   
   

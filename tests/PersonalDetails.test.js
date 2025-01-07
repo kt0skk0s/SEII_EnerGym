@@ -82,7 +82,7 @@ test('POST PersonalDetails with invalid userId returns fail response - 400 ', as
 test("Post /PersonalDetails function returns user details", async (t) => {
      newUserID = 158;
      // Ελέγχω την συνάρτηση που καλώ 
-    const User = await userUserIdPersonalDetailsPOST(newUserID);
+    const User = await userUserIdPersonalDetailsPOST(mockUser,newUserID);
 
     t.truthy(User.Name);
     t.truthy(User.Surname);
