@@ -149,9 +149,8 @@ test.before(async (t) => {
 
 
 test("GET / calling function retrieves workout schedules", async (t) => {
-    const userID = 5
   
-    const AllExercises = await getAllExercises(userID);
+    const AllExercises = await getAllExercises('chest');
     t.truthy(AllExercises); // οτι ειναι object
 
   });

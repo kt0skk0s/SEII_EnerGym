@@ -1,3 +1,5 @@
+'use strict'
+
 /**
  * Retrieve gym's contact details
  * FR9: The user must be able to access contact details. 

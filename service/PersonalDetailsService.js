@@ -10,15 +10,18 @@
 exports.userUserIdPersonalDetailsPOST = function(body,userId) {
     return new Promise(function(resolve, reject) {
       var examples = {};
-      examples['application/json'] = {
-    "Goal" : "Goal",
-    "Surname" : "Surname",
-    "Age" : 10,
-    "email" : "mail@mail.com",
-    "Weight" : 1,
-    "Name" : "Name",
-    "Mobilenumber" : 6
-  };
+      if(body && userId) {
+        examples['application/json'] = {
+          "Goal" : "Goal",
+          "Surname" : "Surname",
+          "Age" : 10,
+          "email" : "mail@mail.com",
+          "Weight" : 1,
+          "Name" : "Name",
+          "Mobilenumber" : 6
+        };
+      }
+
       if (Object.keys(examples).length > 0) {
         resolve(examples[Object.keys(examples)[0]]);
       } else {

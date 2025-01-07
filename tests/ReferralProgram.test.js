@@ -138,7 +138,7 @@ test("Referral code should not exceed maximum length", async (t) => {
 test("Post /PersonalDetails function returns referral code", async (t) => {
      
      // Ελέγχω την συνάρτηση που καλώ 
-    const ref = await userUserIdReferralProgramPOST(mockRef1.UserId);
+    const ref = await userUserIdReferralProgramPOST(mockRef1,mockRef1.UserId);
 
     t.truthy(ref.referralCode);
 

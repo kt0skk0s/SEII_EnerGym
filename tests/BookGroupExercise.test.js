@@ -99,7 +99,7 @@ test('POST Book Group Exercise - Invalid data (wrong date)', async (t) => {
 test("Post / function returns user details", async (t) => {
      const newUserID = 158;
      // Ελέγχω την συνάρτηση που καλώ 
-    const BookExerciseReq = await userUserIdBookGroupExercisePOST(newUserID);
+    const BookExerciseReq = await userUserIdBookGroupExercisePOST(validBookingRequest,newUserID);
 
     t.truthy(BookExerciseReq.name);
     t.truthy(BookExerciseReq.date);

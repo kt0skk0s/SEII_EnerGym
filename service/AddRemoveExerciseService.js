@@ -1,3 +1,4 @@
+'use strict'
 /**
  * Add group exercise to schedule
  * FR19: The admin should be able to add a new group exercise schedule. 
@@ -10,14 +11,17 @@
 exports.adminAdminIDExercisesPOST = function(body,adminID) {
     return new Promise(function(resolve, reject) {
       var examples = {};
-      examples['application/json'] = {
-    "explanationVideo" : {            
-       duration: "1 min",
-       videoURL: "https://www.exercise",
-       thumbnail: "image"},
-    "exerciseImage" : "image",
-    "Title" : "Title"
-  };
+      if(body,adminID) {  
+        examples['application/json'] = {
+        "explanationVideo" : {            
+        duration: "1 min",
+        videoURL: "https://www.exercise",
+        thumbnail: "image"},
+        "exerciseImage" : "image",
+        "Title" : "Title"
+          };
+      }
+      
       if (Object.keys(examples).length > 0) {
         resolve(examples[Object.keys(examples)[0]]);
       } else {
