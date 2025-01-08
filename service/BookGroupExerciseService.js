@@ -21,7 +21,7 @@ exports.userUserIdBookGroupExercisePOST = function(body,userId) {
       if (Object.keys(examples).length > 0) {
         resolve(examples[Object.keys(examples)[0]]);
       } else {
-        resolve();
+        reject();
       }
   
     });

@@ -8,7 +8,7 @@ var Default = require('../service/ReferralProgramService.js');
  * @module ReferralProgram
  */
 
-module.exports.userUserIdReferralProgramPOST = function userUserIdReferralProgramPOST (req, res, next, body, userId) {
+module.exports.userUserIdReferralProgramPOST = function userUserIdReferralProgramPOST (_, res, __, body, userId) {
   Default.userUserIdReferralProgramPOST(body, userId)
     .then(function (response) {
       utils.writeJson(res, response);

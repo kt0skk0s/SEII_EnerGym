@@ -12,7 +12,7 @@ exports.liveCapacityPUT = function(body) {
       if (Object.keys(examples).length > 0) {
         resolve(examples[Object.keys(examples)[0]]);
       } else {
-        resolve();
+        reject();
       }
     });
   }

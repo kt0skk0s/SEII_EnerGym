@@ -64,9 +64,10 @@ test('GET /user/{UserId}/TrainingStats should return valid Histogram as string',
     const response = await t.context.got.get(`user/${mock1.UserId}/TrainingStats`);
     const trainingStats = JSON.parse(response.body);
 
+    //ελεγχος αν είναι τύπου string (δηλαδή link)
     const histogram = trainingStats.Histogram;
     t.true(typeof histogram === 'string', 'Histogram should be a string');
-    t.true(histogram.length > 0, 'Histogram should not be empty');
+    t.true(histogram.length > 0, 'Histogram should not be empty'); // έλεγχος οτι δεν ειναι empty string
 
     
     const timesPerMonth = trainingStats.TimesPerMonth;
@@ -85,5 +86,3 @@ test("GET / TrainingStats calling function retrieves workout schedules", async (
 
   });
 
-//na prosthesw an exw kena dedomena
-//api(components) - userid

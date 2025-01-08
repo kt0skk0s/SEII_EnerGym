@@ -17,7 +17,7 @@ test.before(async (t) => {
       t.context.server.close();
   }); 
 
-
+// Ελέγχoς status code
   test('PUT LiveGymCapacity returns success message', async (t) => {
     const mockData = {
         liveCapacity: 30, 
@@ -31,6 +31,7 @@ test.before(async (t) => {
     t.is(statusCode, 200, 'Should return 200');
 });
 
+// Ελέγχoς για το αν λείπει το livecapacity
 test('PUT LiveGymCapacity fails with missing liveCapacity', async (t) => {
     const mockData = {}; // όταν δεν έχει καμία τιμή
 
@@ -42,6 +43,7 @@ test('PUT LiveGymCapacity fails with missing liveCapacity', async (t) => {
 });
 
 
+// Ελέγχος για το αν έχει αρνητική τιμή(άρα μη εγκυρη τιμή) το liveCapacity
 
 test('PUT LiveGymCapacity/ fails if negative ', async (t) => {
     const mockData = {

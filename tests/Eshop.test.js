@@ -19,6 +19,7 @@ test.after.always((t) => {
     t.context.server.close();
   });
 
+  // Ελέγχος σωστού link για το eshop
 test('GET /Eshop should return the e-shop URL', async (t) => {
     const response = await t.context.got.get('Eshop');
   
@@ -26,14 +27,14 @@ test('GET /Eshop should return the e-shop URL', async (t) => {
     t.is(response.body, 'http://example.com/aeiou', 'Should return the correct e-shop URL');
   });
 
-
+// Ελέγχος επιστροφής 404 status code και αποστολή μηνύματος non-existing route
   test('GET /NonExistingRoute should return 404', async (t) => {
     const response = await t.context.got.get('NonExistingRoute');
 
     t.is(response.statusCode, 404, 'Should return HTTP 404 for a non-existing route');
   });
 
-
+// Ελέγχος σωστού format του link
   test('GET /Eshop returns a valid URL string', async (t) => {
     const response = await t.context.got.get('Eshop');
 
@@ -42,6 +43,7 @@ test('GET /Eshop should return the e-shop URL', async (t) => {
     t.true(url.startsWith('http://'), 'The URL should start with "http"');
 });
 
+// Ελέγχος χρόνου επιστροφής link να είναι λιγότερο απο 1250ms
 
    test('GET /Eshop should respond within 1250ms', async (t) => {
     const startTime = Date.now();

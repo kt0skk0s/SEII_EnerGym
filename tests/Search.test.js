@@ -3,6 +3,7 @@ const got = require('got');
 const http = require('http');
 const listen = require('test-listen');
 const app = require('../index'); 
+// Δηλώση εικονικών ασκήσεων απο το αρχείο mockExercises.js 
 const { mockExercise1, mockExercise2 ,mockExercise3,mockExercise4 } = require('../mock/mockExercises.js');
 
 
@@ -48,7 +49,8 @@ test.before(async (t) => {
             }
         ]
         
-        
+        // Ελέγχει κατά πόσο επιστρέφεται η σωστή άσκηση βάση του search που γίνεται
+
         test('GET/ Search exercise returns the correct exercise based on searchText', async t => {
             let searchText = 'BENCH  PRESS'; 
             
@@ -61,7 +63,7 @@ test.before(async (t) => {
             
         });
 
-      
+      // Ελέγχος για σωστή επιστροφή άσκησης βάση του search που γίνεται ακόμα και αν στο searchtext δεν δίνεται το ολοκληρομένο όνομα της άσκησης
         test('GET / Partial search text should still return the correct exercise', async t => {
             let partialSearchText = 'Bench'; // ένα μέρος του string
             t.true(mockExercise1.Title.replace(/\s+/g, '').toLowerCase().includes(partialSearchText.replace(/\s+/g, '').toLowerCase()));
@@ -77,7 +79,7 @@ test.before(async (t) => {
         });
 
 
-
+    // Ελέγχει ότι με βάση το searchtext μπορούν να εμφανιστούν όλες οι ασκήσεις που περιέχουν συγκεκριμένα στοιχεία πχ "Bench""
     test('GET/ Search should return many exercises', async t => {
  
         let searchText = 'Bench';  
@@ -110,6 +112,7 @@ test.before(async (t) => {
 
     });
 
+    // Ελέγχει κατά πόσο όταν έχω searchtext με λάθος άσκηση να επιστρέφει 0 ασκήσεις
     test('GET/ Search with invalid exercise name returns 0 exercises', async t => {
         let searchText = ' invalid Exercise';  //searchText που δεν αντιστοιχεί σε καμία άσκηση
         let foundExercises = mockExercises.filter(exercise =>
@@ -131,6 +134,7 @@ test.before(async (t) => {
 
     });
 
+    // Ελέγχος search βάση κάποιας κατηγορίας (φίλτρου)
     test('Filter exercises by category', async t => {
         let categoryFilter = mockFilters.find(Filter => Filter.name === "chest");
         console.log(categoryFilter);

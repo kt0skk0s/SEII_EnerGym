@@ -20,12 +20,15 @@ test.after.always((t) => {
     t.context.server.close();
   });
 
+  
+// Ελέγχει αν επιστρέφει σωστά το status code
 test('GET /ContactInformation should return HTTP 200', async (t) => {
     const response = await t.context.got.get(`ContactInformation`);
   
     t.is(response.statusCode, 200, 'Should return HTTP 200');
 });
 
+// Ελέγχει αν είναι σωστός ο τύπος
 test('GET /ContactInformation should return application/json as Content-Type', async (t) => {
     const response = await t.context.got.get(`ContactInformation`);
 
@@ -34,13 +37,14 @@ test('GET /ContactInformation should return application/json as Content-Type', a
     t.true(contentType.includes('application/json'), 'Content-Type should include application/json');
 });
 
-// Mporei na min xreiazetai
+
 test('GET /ContactInformation should return a 404 for non-existing route', async (t) => {
-    const response = await t.context.got.get('NonExistingRoute');
-  
+    const response = await t.context.got.get('NonExistingRoute');  
     t.is(response.statusCode, 404, 'Should return HTTP 404 for a non-existing route');
 });
 
+
+// Ελέγχος για το αν επιστρέφονται οι σωστές πληροφορίες
 test('GET /ContactInformation should return the correct contact details in JSON format', async (t) => {
     const response = await t.context.got.get('ContactInformation');
     const contactInfo = JSON.parse(response.body);
@@ -50,6 +54,8 @@ test('GET /ContactInformation should return the correct contact details in JSON 
     t.is(contactInfo.PhysicalAddress, 'PhysicalAddress', 'PhysicalAddress should be correct');
 });
 
+
+// Ελέγχος έγκυρου format του email
 test('GET /ContactInformation returns a valid email format', async (t) => {
     const response = await t.context.got.get('ContactInformation');
     const contactInfo = JSON.parse(response.body);
@@ -59,6 +65,7 @@ test('GET /ContactInformation returns a valid email format', async (t) => {
     t.true(email.includes('@'), 'Email should contain "@"');
 });
 
+// Ελέγχος έγκυρου format του τηλεφώνου
 test('GET /ContactInformation returns valid phone number format', async (t) => {
     const response = await t.context.got.get('ContactInformation');
     const contactInfo = JSON.parse(response.body);
@@ -68,6 +75,7 @@ test('GET /ContactInformation returns valid phone number format', async (t) => {
     t.true(phoneNumber > 0, 'Phone number should be positive');
 });
 
+// Ελέγχος έγκυρης διέυθυνσης
 test('GET /ContactInformation returns a valid physical address', async (t) => {
     const response = await t.context.got.get('ContactInformation');
     const contactInfo = JSON.parse(response.body);

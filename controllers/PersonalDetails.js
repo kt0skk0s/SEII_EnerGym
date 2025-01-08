@@ -8,7 +8,7 @@ var Default = require('../service/PersonalDetailsService.js');
  * @module PersonalDetails
  */
 
-module.exports.userUserIdPersonalDetailsPOST = function userUserIdPersonalDetailsPOST (req, res, next, body, userId) {
+module.exports.userUserIdPersonalDetailsPOST = function userUserIdPersonalDetailsPOST (_, res, __, body, userId) {
   Default.userUserIdPersonalDetailsPOST(body, userId)
     .then(function (response) {
       utils.writeJson(res, response);
