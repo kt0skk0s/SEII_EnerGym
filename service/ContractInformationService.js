@@ -26,7 +26,7 @@ exports.userUserIdContractInformationGET = function(userId) {
       if (Object.keys(examples).length > 0) {
         resolve(examples[Object.keys(examples)[0]]);
       } else {
-        resolve();
+        reject();
       }
     });
   }

@@ -28,7 +28,7 @@ exports.adminAdminIDAddGroupExerciseSchedulePOST = function (body, adminID) {
       if (Object.keys(examples).length > 0) {
         resolve(examples['application/json']);
       } else {
-        resolve();
+        reject();
       }
     });
   }

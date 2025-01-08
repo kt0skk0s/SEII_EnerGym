@@ -34,6 +34,7 @@ test("Referral code should be generated for a valid user", async (t) => {
     json: mockRef1,
   });
 
+  t.is(response.statusCode, 200 ); // ελεγχος statuscode 200
   t.truthy(mockRef1.referralCode, "Referral code should be generated");
   t.is(typeof mockRef1.referralCode, "string", "Referral code should be a string");
 
@@ -44,7 +45,6 @@ test("Referral code with invalid format should return error", async (t) => {
   const response = await t.context.got.post(`user/${userWithoutReferralCode.UserId}/ReferralProgram`, {
     json: userWithoutReferralCode,
   });
-
   t.truthy(response.body.referralCode, "Referral code should not be empty");
   t.is(userWithoutReferralCode.referralCode, "", "Referral code should not be an empty string");
 });
@@ -139,7 +139,6 @@ test("Post /PersonalDetails function returns referral code", async (t) => {
      
      // Ελέγχω την συνάρτηση που καλώ 
     const ref = await userUserIdReferralProgramPOST(mockRef1,mockRef1.UserId);
-
     t.truthy(ref.referralCode);
 
 });

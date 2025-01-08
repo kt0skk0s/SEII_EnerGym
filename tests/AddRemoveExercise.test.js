@@ -45,7 +45,7 @@ test('POST /admin/{AdminID}/exercises should return appropriate JSON format', as
         json: newExercise,
     });
 
-    t.is(response.statusCode, 200, );
+    t.is(response.statusCode, 200);
     
    t.true(newExercise.exerciseImage.startsWith('https://'), 'Exercise image should be a valid URL');
     

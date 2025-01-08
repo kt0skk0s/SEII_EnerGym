@@ -32,7 +32,7 @@ test.before(async (t) => {
     }
 };
 
-BadUserID = 660;
+BadUserID = 660; // λάθος τύπος στα Mock δεδομένα
 const BadMockUser = {
     UserId : BadUserID,
     PersonalDetails: {
@@ -53,8 +53,9 @@ test('POST/ PersonalDetails returns success response', async (t) => {
         responseType: 'json'
     });
    
-    t.is(statusCode, 200 , 'Should return 200');
+    t.is(statusCode, 200 , 'Should return 200'); //έλεγχος αν το statuscode είναι 200
                         
+    // ελέγχει αν είναι truthy κάθε τιμή 
     t.truthy(body.Name, 'Name should be returned in response');
     t.truthy(body.Surname, 'Surname should be returned in response');
     t.truthy(body.Age, 'Age should be returned in response');
@@ -68,13 +69,12 @@ test('POST/ PersonalDetails returns success response', async (t) => {
 });
 
 
-
+// Έλεγχος λαθος τύπων δεδομένων οτι θα επιστρεψει 400 status code
 test('POST PersonalDetails with invalid userId returns fail response - 400 ', async (t) => {
     const { body, statusCode } = await t.context.got.post(`user/${BadMockUser.UserId}/PersonalDetails`, {
         json: BadMockUser,
     });
-    // Assertions
-    t.is(statusCode, 400, 'Should return 400 Bad input type for user'); //sto api na prostheso to 400 
+    t.is(statusCode, 400, 'Should return 400 Bad input type for user'); 
 
 });
 
@@ -84,7 +84,7 @@ test("Post /PersonalDetails function returns user details", async (t) => {
      // Ελέγχω την συνάρτηση που καλώ 
     const User = await userUserIdPersonalDetailsPOST(mockUser,newUserID);
 
-    t.truthy(User.Name);
+    t.truthy(User.Name); 
     t.truthy(User.Surname);
     t.truthy(User.Age);
     t.truthy(User.Goal);
@@ -92,7 +92,8 @@ test("Post /PersonalDetails function returns user details", async (t) => {
     t.truthy(User.email);
     t.truthy(User.Mobilenumber);
 
-    t.is(User.Name, "Name");
+    // ελεγχος αν οι τιμές είναι όντως αυτές
+    t.is(User.Name, "Name"); 
     t.is(User.Age, 10);
     t.is(User.Goal, "Goal");
 });
@@ -111,24 +112,6 @@ test("Post/ PersonalDetails function returns correct headers", async (t) => {
 
 
 
-
-    /*
-    test('POST contactDetails returns the correct response', async (t) => {
-        const mockContactDetails = {
-            Email: "test@example.com",
-            PhoneNumber: "9655574",
-            Address: "ADdress"
-        };
-        
-        const response = await t.context.got.post('contactDetails', {
-            json: mockContactDetails
-        });
-        
-        // Assertions
-        t.is(response.statusCode, 200, 'Should return 200 OK');
-        t.deepEqual(response.body, mockContactDetails, 'Response body should match the mock contact details');
-    });
-    */
 
     
 
