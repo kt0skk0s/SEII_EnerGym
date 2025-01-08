@@ -16,8 +16,6 @@ describe(" GET /exercise", () => {
   
       // Κάνε κλικ στο GET /exercise
       cy.get("#operations-default-getAllExercises").click();
-  
-      // Επαλήθευσε ότι εμφανίζεται η περιγραφή του endpoint
       cy.contains("Returns all exercises").should("be.visible");
     });
   
@@ -41,25 +39,22 @@ describe(" GET /exercise", () => {
       cy.get("#operations-default-getAllExercises").click();
       cy.contains("Try it out").click();
   
-      // Επαλήθευσε ότι τα πεδία 'searchText' και 'filter' είναι ορατά
+      // Επαλήθευση ότι τα πεδία 'searchText' και 'filter' είναι ορατά
       cy.get('[placeholder="searchText"]').should("be.visible").type("example").should("have.value", "example");
     });
   
     /**
      * Checks if the Execute button is clickable
      */
+
     it("Checks if the Execute button is clickable", () => {
+     
       cy.get("#operations-default-getAllExercises").click();
       cy.contains("Try it out").click();
-  
-      // Εισάγει δεδομένα στο πεδίο 'searchText'
       cy.get('[placeholder="searchText"]').type("example");
-  
-      // Πατάει το κουμπί Execute
       cy.get(".btn.execute").should("be.visible").click();
-  
-      // Επαλήθευσε ότι εμφανίζονται τα αποτελέσματα
       cy.get(".responses-wrapper").should("be.visible");
+
     });
   
     /**
@@ -69,11 +64,11 @@ describe(" GET /exercise", () => {
       cy.get("#operations-default-getAllExercises").click();
       cy.contains("Try it out").click();
   
-      // Εισάγει δεδομένα στο πεδίο 'searchText'
-      cy.get('[placeholder="searchText"]').type("example");
+      cy.get('[placeholder="searchText"]').type("example");  // Εισάγει δεδομένα στο πεδίο 'searchText'
+
   
-      // Πατάει το κουμπί Execute
-      cy.get(".btn.execute").click();
+      cy.get(".btn.execute").click();   // κλικ στο Execute
+
   
       // Επαλήθευσε ότι η απάντηση περιέχει τα πεδία explanationVideo, exerciseImage και Title
       cy.get(".responses-wrapper pre").should("contain.text", "explanationVideo");

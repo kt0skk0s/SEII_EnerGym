@@ -36,8 +36,8 @@ BadUserID = 660; // λάθος τύπος στα Mock δεδομένα
 const BadMockUser = {
     UserId : BadUserID,
     PersonalDetails: {
-        Name: 77,
-        Surname: "A string",
+        Name: 77, //επρεπε να ειναι string
+        Surname: "A string", 
         Age: 43,
         email: "Astring.@mail.com",
         Mobilenumber: "4444444",
@@ -64,7 +64,7 @@ test('POST/ PersonalDetails returns success response', async (t) => {
     t.truthy(body.Weight, 'Weight should be returned in response');
     t.truthy(body.Goal, 'Goal should be returned in response');
 
-    console.log('Response Body:', body);
+    console.log('Response Body:', body); // ελεγχος μηνυματος στο temrinal
 
 });
 
@@ -79,11 +79,13 @@ test('POST PersonalDetails with invalid userId returns fail response - 400 ', as
 });
 
 
+// Ελεχγος της συνάρτησης που καλώ  (userUserIdPersonalDetailsPOST)
 test("Post /PersonalDetails function returns user details", async (t) => {
      newUserID = 158;
-     // Ελέγχω την συνάρτηση που καλώ 
+     // Kαλώ την συνάρτηση  
     const User = await userUserIdPersonalDetailsPOST(mockUser,newUserID);
 
+    // ελεγχος αν οι τιμές είναι truthy
     t.truthy(User.Name); 
     t.truthy(User.Surname);
     t.truthy(User.Age);
@@ -98,6 +100,7 @@ test("Post /PersonalDetails function returns user details", async (t) => {
     t.is(User.Goal, "Goal");
 });
 
+// Ελεγχος των headers οτι περιέχουν content type 
 test("Post/ PersonalDetails function returns correct headers", async (t) => {
 
     const { headers, statusCode } = await t.context.got.post(`user/${mockUser.UserId}/PersonalDetails`, {

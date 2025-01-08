@@ -2,25 +2,30 @@ describe(" GET /Eshop", () => {
     /**
      * Opens SwaggerHub UI
      */
+
     beforeEach(() => {
       cy.visit("/docs/");
     });
   
-     
-    it("Checks if the GET /eshop endpoint exists and response", () => {
-    // Checks if the GET /eshop endpoint exists  
-    cy.contains('Eshop').should('be.visible').click();
+/*     
+* Ελέγχω αν υπάρχει το κουμπί "eshop" και κάνω click, 
+*στη συνέχεια ελέγχω αν υπάρχει το κουμπί "Try it out" και το πατάω,
+*ελέγχω αν υπάρχει το κουμπί "Execute" και το πατάω,
+* Τέλος εντοπίζω το Response
+*/
 
-    // Ελέγχει αν το κουμπί Try it out υπάρχει και είναι ορατό
-    cy.contains("Try it out").should("exist").should("be.visible").click();
-      
-    // Ελέγχει αν το κουμπί Execute υπάρχει και είναι ορατό
-    cy.contains("Execute").should("exist").should("be.visible").click();
+it("Checks if the GET /eshop endpoint exists and response", () => {
   
-    // Ελέγχει αν εμφανίζεται το Response
-    cy.contains("Response").should("exist");
+  cy.contains('Eshop').should('be.visible').click();
 
-    });
+  cy.contains("Try it out").should("exist").should("be.visible").click();
+  
+  cy.contains("Execute").should("exist").should("be.visible").click();
+
+  cy.contains("Response").should("exist");
+
+  });
+
 
     it("Checks the UI", () => {
         // Checks if the GET /eshop endpoint exists  

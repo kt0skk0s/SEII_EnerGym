@@ -5,17 +5,18 @@ describe("EnerGym API: POST /admin/{AdminID}/exercises", () => {
     });
   
     it("Checks if the POST /admin/{AdminID}/exercises endpoint exists and can be clicked", () => {
-          // Ελέγχει αν υπάρχει το κουμπί "exercise" και το ανοίγει
-          cy.contains("Add new exercise").should("exist").should("be.visible").click();
+      
+      cy.contains("Add new exercise").should("exist").should("be.visible").click();  // Ελέγχει αν υπάρχει το κουμπί "exercise" και το ανοίγει
+
   
       // Επαληθεύει ότι το endpoint άνοιξε σωστά
-      cy.contains('Add new exercise').should('be.visible'); // Περιγραφή endpoint
+      cy.contains('Add new exercise').should('be.visible'); 
       cy.contains('AdminID').should('be.visible'); // Έλεγχος παραμέτρου
       
       cy.contains("Try it out").should("exist").click();
   
-      // Εντοπίζει και πατάει το κουμπί Execute
-      cy.contains("Execute").should("exist").click();
+      cy.contains("Execute").should("exist").click();   // Εντοπίζει και πατάει το κουμπί Execute
+
   
      // Ελέγχει ότι η απόκριση περιέχει status code 201
       cy.contains("Response").should("exist");
@@ -27,11 +28,11 @@ describe("EnerGym API: POST /admin/{AdminID}/exercises", () => {
   
     it("Checks success response when all fields are valid", () => {
       
-      // Ελέγχει αν υπάρχει το κουμπί "exercise" και το ανοίγει
-      cy.contains("Add new exercise").should("exist").should("be.visible").click();
+      cy.contains("Add new exercise").should("exist").should("be.visible").click();   // Ελέγχει αν υπάρχει το κουμπί "exercise" και το ανοίγει
+
       
-      // Πατάει Try it out
-      cy.contains("Try it out").click();
+      cy.contains("Try it out").click(); // κλικ στο Try it out
+
   
       cy.get("textarea").clear().type(`
         {
