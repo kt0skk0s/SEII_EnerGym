@@ -65,7 +65,7 @@ test('GET /ContactInformation returns a valid email format', async (t) => {
     t.true(email.includes('@'), 'Email should contain "@"');
 });
 
-// Ελέγχει έγκυρου format του τηλεφώνου
+// Ελέγχος έγκυρου format του τηλεφώνου
 test('GET /ContactInformation returns valid phone number format', async (t) => {
     const response = await t.context.got.get('ContactInformation');
     const contactInfo = JSON.parse(response.body);
