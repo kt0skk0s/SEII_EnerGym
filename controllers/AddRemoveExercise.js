@@ -8,7 +8,7 @@ var AddRemoveExercise = require('../service/AddRemoveExerciseService.js');
  * @module AddRemoveExercise
  */
 
-module.exports.adminAdminIDExercisesDELETE = function adminAdminIDExercisesDELETE (req, res, next, adminID, exerciseId) {
+module.exports.adminAdminIDExercisesDELETE = function adminAdminIDExercisesDELETE (_, res, __, adminID, exerciseId) {
     AddRemoveExercise.adminAdminIDExercisesDELETE(adminID, exerciseId)
     .then(function (response) {
       utils.writeJson(res, response);
@@ -18,7 +18,7 @@ module.exports.adminAdminIDExercisesDELETE = function adminAdminIDExercisesDELET
     });
 };
 
-module.exports.adminAdminIDExercisesPOST = function adminAdminIDExercisesPOST (req, res, next, body, adminID) {
+module.exports.adminAdminIDExercisesPOST = function adminAdminIDExercisesPOST (_, res, __, body, adminID) {
     AddRemoveExercise.adminAdminIDExercisesPOST(body, adminID)
     .then(function (response) {
       utils.writeJson(res, response);

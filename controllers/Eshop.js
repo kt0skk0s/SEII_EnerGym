@@ -8,7 +8,7 @@ var Default = require('../service/EshopService.js');
  * @module Eshop
  */
 
-module.exports.eshopGET = function eshopGET (req, res, next) {
+module.exports.eshopGET = function eshopGET (_, res, __) {
   Default.eshopGET()
     .then(function (response) {
       utils.writeJson(res, response);
