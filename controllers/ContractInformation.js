@@ -8,7 +8,7 @@ var Default = require('../service/ContractInformationService.js');
  * @module Contractinformation
  */
 
-module.exports.userUserIdContractInformationGET = function userUserIdContractInformationGET(req, res, next, userId) {
+module.exports.userUserIdContractInformationGET = function userUserIdContractInformationGET(_, res, __, userId) {
   Default.userUserIdContractInformationGET(userId)
     .then(function (response) {
       utils.writeJson(res, response); // Επιστρέφει την απόκριση JSON
