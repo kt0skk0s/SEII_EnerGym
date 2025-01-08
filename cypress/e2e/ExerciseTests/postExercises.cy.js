@@ -7,7 +7,7 @@ describe("EnerGym API: POST /admin/{AdminID}/exercises", () => {
       cy.wait(2000); // Περιμένω να φορτώσει η σελίδα
     });
 
-//Ελέγχω αν υπάρχει το κουμπί "exercise" και κάνω click, 
+//Ελέγχω αν υπάρχει το κουμπί "add a new exercise" και κάνω click, 
 //στη συνέχεια βλέπω ότι υπάρχει η παράμετρος AdminID και το κουμπί "Try it out" και το πατάω.
 //Εντοπίζω και πατάω το Execute, στο τέλος ελέγχω ότι η απόκριση περιέχει status code 201
 
@@ -28,10 +28,12 @@ describe("EnerGym API: POST /admin/{AdminID}/exercises", () => {
   
     });
   
-  
+//Ελέγχω αν υπάρχει το κουμπί "add a new exercise" και κάνω click, 
+//στη συνέχεια βλέπω το κουμπί "Try it out" και το πατάω.
+//Προσθέτω στο textarea τα στοιχεία της νέας άσκησης και πατάω Execute ,
+//στο τέλος ελέγχω ότι η απόκριση περιέχει status code 201
     it("Checks success response when all fields are valid", () => {
       
-      // Ελέγχει αν υπάρχει το κουμπί "exercise" και το ανοίγει
       cy.contains("Add new exercise").should("exist").should("be.visible").click();
       
       // Πατάει Try it out
@@ -45,7 +47,6 @@ describe("EnerGym API: POST /admin/{AdminID}/exercises", () => {
         }`
       );
     
-      // Πατάει Execute
       cy.contains("Execute").click();
     
       // Ελέγχει ότι η απόκριση περιέχει status code 201
